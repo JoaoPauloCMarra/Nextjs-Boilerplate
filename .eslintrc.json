@@ -1,0 +1,85 @@
+{
+	"root": true,
+	"extends": ["next/core-web-vitals", "plugin:tailwindcss/recommended", "prettier"],
+	"plugins": ["unused-imports", "import", "tailwindcss", "prettier"],
+	"rules": {
+		"unused-imports/no-unused-imports": "error",
+		"unused-imports/no-unused-vars": [
+			"warn",
+			{
+				"vars": "all",
+				"varsIgnorePattern": "^_",
+				"args": "after-used",
+				"argsIgnorePattern": "^_"
+			}
+		],
+
+		"import/order": [
+			"error",
+			{
+				"newlines-between": "never",
+				"groups": [
+					"builtin",
+					"external",
+					"internal",
+					"parent",
+					"sibling",
+					"index",
+					"unknown",
+					"object",
+					"type"
+				],
+				"pathGroups": [
+					{
+						"pattern": "react",
+						"group": "external",
+						"position": "before"
+					},
+					{
+						"pattern": "next",
+						"group": "external",
+						"position": "before"
+					},
+					{
+						"pattern": "@/lib/**",
+						"group": "external",
+						"position": "after"
+					},
+					{
+						"pattern": "@/pages/**",
+						"group": "external",
+						"position": "after"
+					},
+					{
+						"pattern": "@/**",
+						"group": "external",
+						"position": "after"
+					},
+					{
+						"pattern": "./**",
+						"group": "internal",
+						"position": "after"
+					},
+					{
+						"pattern": "**/*.css",
+						"group": "index",
+						"position": "after"
+					}
+				],
+				"pathGroupsExcludedImportTypes": ["react"],
+				"alphabetize": {
+					"order": "asc",
+					"caseInsensitive": true
+				}
+			}
+		],
+		"import/first": "error",
+		"import/no-amd": "error",
+		"import/no-anonymous-default-export": "warn",
+		"import/no-webpack-loader-syntax": "error",
+		"import/no-named-as-default": "error",
+		"import/prefer-default-export": "off",
+
+		"@next/next/no-img-element": "off"
+	}
+}
