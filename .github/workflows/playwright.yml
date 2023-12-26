@@ -8,23 +8,15 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Install dependencies
-        run: npm install -g yarn && yarn
 
       - name: Install Playwright Browsers
         run: yarn playwright install --with-deps
 
-      - name: Build the app
-        run: yarn build
-
       - name: Run Playwright tests
-        run: yarn test:e2e
+        run: yarn playwright test
 
       - uses: actions/upload-artifact@v3
         if: always()
