@@ -52,7 +52,7 @@
 		@apply border-border;
 	}
 	body {
-		@apply bg-background text-foreground;
+		@apply min-h-screen bg-background text-foreground antialiased;
 		font-feature-settings: /* fix for Chrome */
 			'liga' 1,
 			'calt' 1;

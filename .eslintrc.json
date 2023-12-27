@@ -4,7 +4,7 @@
 		"next/core-web-vitals",
 		"plugin:jsx-a11y/recommended",
 		"plugin:tailwindcss/recommended",
-		"prettier"
+		"plugin:prettier/recommended"
 	],
 	"plugins": ["unused-imports", "import", "prettier"],
 	"rules": {
@@ -47,27 +47,22 @@
 					},
 					{
 						"pattern": "@/lib/**",
-						"group": "external",
+						"group": "internal",
 						"position": "after"
 					},
 					{
 						"pattern": "@/pages/**",
-						"group": "external",
+						"group": "internal",
 						"position": "after"
 					},
 					{
 						"pattern": "@/**",
-						"group": "external",
+						"group": "internal",
 						"position": "after"
 					},
 					{
 						"pattern": "./**",
 						"group": "internal",
-						"position": "after"
-					},
-					{
-						"pattern": "**/*.css",
-						"group": "index",
 						"position": "after"
 					}
 				],

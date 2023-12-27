@@ -1,3 +1,4 @@
+import defaultTheme from 'tailwindcss/defaultTheme';
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
@@ -10,6 +11,9 @@ const config: Config = {
 	theme: {
 		container: {
 			center: true
+		},
+		fontFamily: {
+			sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans]
 		},
 		extend: {
 			colors: {
