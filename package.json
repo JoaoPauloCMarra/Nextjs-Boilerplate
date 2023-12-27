@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
+		"dev": "next dev --turbo",
 		"build": "next build",
 		"start": "next start",
 		"test:unit": "vitest",
@@ -16,7 +16,7 @@
 		"node": ">=18.17.0",
 		"yarn": ">=1.2.19"
 	},
-	"packageManager": "pnpm@8.9.0",
+	"packageManager": "yarn@1.2.19",
 	"dependencies": {
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.0.0",

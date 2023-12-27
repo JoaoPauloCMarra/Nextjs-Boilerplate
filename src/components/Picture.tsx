@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { ReactEventHandler, useState } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
@@ -14,6 +14,14 @@ type Props = {
 const Picture = ({ src, height, width, alt }: Props) => {
 	const [loaded, setLoaded] = useState(false);
 	const [error, setError] = useState(false);
+
+	const onImageLoadSuccess: ReactEventHandler<HTMLImageElement> = () => {
+		setLoaded(true);
+	};
+
+	const onImageLoadError: ReactEventHandler<HTMLImageElement> = () => {
+		setError(true);
+	};
 
 	return (
 		<div className="relative flex size-full items-center justify-center overflow-hidden">
@@ -34,9 +42,8 @@ const Picture = ({ src, height, width, alt }: Props) => {
 				height={height}
 				width={width}
 				className={cn('size-fit object-cover', !error && loaded ? 'visible' : 'invisible')}
-				layout="intrinsic"
-				onLoad={() => setLoaded(true)}
-				onError={() => setError(true)}
+				onLoad={onImageLoadSuccess}
+				onError={onImageLoadError}
 			/>
 		</div>
 	);

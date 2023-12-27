@@ -1,7 +1,12 @@
 {
 	"root": true,
-	"extends": ["next/core-web-vitals", "plugin:tailwindcss/recommended", "prettier"],
-	"plugins": ["unused-imports", "import", "tailwindcss", "prettier"],
+	"extends": [
+		"next/core-web-vitals",
+		"plugin:jsx-a11y/recommended",
+		"plugin:tailwindcss/recommended",
+		"prettier"
+	],
+	"plugins": ["unused-imports", "import", "prettier"],
 	"rules": {
 		"unused-imports/no-unused-imports": "error",
 		"unused-imports/no-unused-vars": [
