@@ -69,7 +69,6 @@
 		@apply border-border;
 	}
 	body {
-		@apply min-h-screen bg-background font-sans text-foreground antialiased;
 		font-feature-settings: /* fix for Chrome */
 			'liga' 1,
 			'calt' 1;

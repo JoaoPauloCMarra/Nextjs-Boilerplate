@@ -1,8 +1,12 @@
 'use client';
 
-import { BrandLogo } from '@/components/brand-logo';
-import { FormDemo } from '@/components/form-demo';
+import dynamic from 'next/dynamic';
 import { PageContainer } from '@/components/page-container';
+
+const BrandLogo = dynamic(() =>
+	import('@/components/brand-logo').then((module) => module.BrandLogo)
+);
+const FormDemo = dynamic(() => import('@/components/form-demo').then((module) => module.FormDemo));
 
 export default function HomePage() {
 	return (

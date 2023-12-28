@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { PageContainer } from '@/components/page-container';
 
 export default function Error({
 	error,
@@ -15,16 +16,18 @@ export default function Error({
 	}, [error]);
 
 	return (
-		<div>
-			<h2>Something went wrong!</h2>
-			<button
-				onClick={
-					// Attempt to recover by trying to re-render the segment
-					() => reset()
-				}
-			>
-				Try again
-			</button>
-		</div>
+		<PageContainer>
+			<div className="flex flex-1 flex-col items-center justify-center" role="status">
+				<h2>Something went wrong!</h2>
+				<button
+					onClick={
+						// Attempt to recover by trying to re-render the segment
+						() => reset()
+					}
+				>
+					Try again
+				</button>
+			</div>
+		</PageContainer>
 	);
 }
