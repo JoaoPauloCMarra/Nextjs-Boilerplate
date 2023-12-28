@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { APP_NAME } from '@/lib/constants';
+import { TEST_IDS } from '@/components/form-demo';
 
 test('has title', async ({ page }) => {
 	await page.goto('/');
@@ -10,17 +11,19 @@ test('has title', async ({ page }) => {
 test('form works', async ({ page }) => {
 	await page.goto('/');
 
-	const inputName = page.getByTestId('input-name');
+	const inputName = page.getByTestId(TEST_IDS.inputUsername);
+	const buttonClear = page.getByTestId(TEST_IDS.buttonClear);
+	const buttonSubmit = page.getByTestId(TEST_IDS.buttonSubmit);
+
 	expect(inputName).toBeTruthy();
-	await inputName.fill('Jota');
+	expect(buttonClear).toBeTruthy();
+	expect(buttonSubmit).toBeTruthy();
 
-	const inputEmail = page.getByTestId('input-email');
-	expect(inputEmail).toBeTruthy();
-	await inputEmail.fill('jota.email@domain.com');
+	await inputName.fill('jota');
 
-	const inputPassword = page.getByTestId('input-password');
-	const inputPasswordType = await inputPassword.getAttribute('type');
-	expect(inputPassword).toBeTruthy();
-	expect(inputPasswordType).toBe('password');
-	await inputPassword.fill('@jota123321');
+	expect(inputName).toHaveValue('jota');
+
+	await buttonClear.click();
+
+	expect(inputName).toBeEmpty();
 });

@@ -17,6 +17,12 @@ import {
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
 
+export const TEST_IDS = {
+	inputUsername: 'input-username',
+	buttonClear: 'button-clear',
+	buttonSubmit: 'button-submit'
+};
+
 const formSchema = z.object({
 	username: z.string().toLowerCase().min(2, {
 		message: 'Username must be at least 2 characters.'
@@ -59,6 +65,7 @@ export const FormDemo = () => {
 							<FormLabel>Username</FormLabel>
 							<FormControl>
 								<Input
+									data-testid={TEST_IDS.inputUsername}
 									placeholder="your desired username"
 									className="lowercase"
 									inputMode="text"
@@ -70,10 +77,15 @@ export const FormDemo = () => {
 						</FormItem>
 					)}
 				/>
-				<Button type="reset" variant="ghost" onClick={() => form.reset()}>
+				<Button
+					type="reset"
+					variant="ghost"
+					onClick={() => form.reset()}
+					data-testid={TEST_IDS.buttonClear}
+				>
 					Clear
 				</Button>
-				<Button type="submit" variant="default">
+				<Button type="submit" variant="default" data-testid={TEST_IDS.buttonSubmit}>
 					Submit
 				</Button>
 			</form>
