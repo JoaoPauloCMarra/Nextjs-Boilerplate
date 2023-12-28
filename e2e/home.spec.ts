@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { APP_NAME } from '@/lib/constants';
-import { TEST_IDS } from '@/components/form-demo';
+import { USERNAME_FORM_TESTIDS } from '@/features/username-form/test-ids';
 
 test('has title', async ({ page }) => {
 	await page.goto('/');
@@ -11,9 +11,9 @@ test('has title', async ({ page }) => {
 test('form works', async ({ page }) => {
 	await page.goto('/');
 
-	const inputName = page.getByTestId(TEST_IDS.inputUsername);
-	const buttonClear = page.getByTestId(TEST_IDS.buttonClear);
-	const buttonSubmit = page.getByTestId(TEST_IDS.buttonSubmit);
+	const inputName = page.getByTestId(USERNAME_FORM_TESTIDS.inputUsername);
+	const buttonClear = page.getByTestId(USERNAME_FORM_TESTIDS.buttonClear);
+	const buttonSubmit = page.getByTestId(USERNAME_FORM_TESTIDS.buttonSubmit);
 
 	expect(inputName).toBeTruthy();
 	expect(buttonClear).toBeTruthy();
