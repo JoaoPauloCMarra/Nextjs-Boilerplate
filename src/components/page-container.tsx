@@ -1,7 +1,5 @@
 import { PropsWithChildren } from 'react';
 
-const PageContainer = ({ children }: PropsWithChildren) => (
+export const PageContainer = ({ children }: PropsWithChildren) => (
 	<main className="container flex flex-1 flex-col items-center py-4">{children}</main>
 );
-
-export default PageContainer;

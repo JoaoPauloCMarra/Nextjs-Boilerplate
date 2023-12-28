@@ -18,7 +18,8 @@ export default defineConfig({
 			'**/.vscode/**',
 			'**/e2e/**',
 			'**/node_modules/**',
-			'**/public/**'
+			'**/public/**',
+			'**/test-results/**'
 		]
 	}
 });

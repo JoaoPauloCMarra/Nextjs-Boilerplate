@@ -10,7 +10,8 @@
 		"test:e2e": "playwright test --ui",
 		"lint": "next lint --fix --max-warnings 0",
 		"format": "prettier . --write",
-		"prepare": "husky install"
+		"prepare": "husky install",
+		"shadcn-add": "npx shadcn-ui@latest add"
 	},
 	"engines": {
 		"node": ">=18.17.0",
@@ -19,10 +20,15 @@
 	"packageManager": "yarn@1.2.19",
 	"dependencies": {
 		"@hookform/resolvers": "^3.3.3",
+		"@radix-ui/react-label": "^2.0.2",
+		"@radix-ui/react-scroll-area": "^1.0.5",
+		"@radix-ui/react-select": "^2.0.0",
+		"@radix-ui/react-slot": "^1.0.2",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.0.0",
 		"date-fns": "^3.0.6",
 		"jotai": "^2.6.0",
+		"lucide-react": "^0.302.0",
 		"next": "14.0.4",
 		"react": "^18",
 		"react-dom": "^18",

@@ -1,19 +1,20 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
+import { fontFamily } from 'tailwindcss/defaultTheme';
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
-	content: [
-		'./src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-		'./src/components/**/*.{js,ts,jsx,tsx,mdx}',
-		'./src/app/**/*.{js,ts,jsx,tsx,mdx}'
-	],
 	darkMode: ['class'],
+	content: ['./src/**/*.{ts,tsx}'],
+	prefix: '',
 	theme: {
 		container: {
-			center: true
+			center: true,
+			padding: '2rem',
+			screens: {
+				'2xl': '1400px'
+			}
 		},
 		fontFamily: {
-			sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans]
+			sans: ['var(--font-sans)', ...fontFamily.sans]
 		},
 		extend: {
 			colors: {
@@ -31,8 +32,8 @@ const config: Config = {
 					foreground: 'hsl(var(--secondary-foreground))'
 				},
 				destructive: {
-					DEFAULT: 'hsl(var(--destructive) / <alpha-value>)',
-					foreground: 'hsl(var(--destructive-foreground) / <alpha-value>)'
+					DEFAULT: 'hsl(var(--destructive))',
+					foreground: 'hsl(var(--destructive-foreground))'
 				},
 				muted: {
 					DEFAULT: 'hsl(var(--muted))',
@@ -51,13 +52,27 @@ const config: Config = {
 					foreground: 'hsl(var(--card-foreground))'
 				}
 			},
-			svg: {
-				black: 'brightness(0) saturate(100%)',
-				white:
-					'brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(138deg) brightness(108%) contrast(101%)'
+			borderRadius: {
+				lg: 'var(--radius)',
+				md: 'calc(var(--radius) - 2px)',
+				sm: 'calc(var(--radius) - 4px)'
+			},
+			keyframes: {
+				'accordion-down': {
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
+				},
+				'accordion-up': {
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
+				}
+			},
+			animation: {
+				'accordion-down': 'accordion-down 0.2s ease-out',
+				'accordion-up': 'accordion-up 0.2s ease-out'
 			}
 		}
 	},
-	plugins: []
+	plugins: [require('tailwindcss-animate')]
 };
 export default config;

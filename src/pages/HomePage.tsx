@@ -1,13 +1,15 @@
 'use client';
 
-import Logo from '@/components/Logo';
-import PageContainer from '@/components/PageContainer';
+import { BrandLogo } from '@/components/brand-logo';
+import { FormDemo } from '@/components/form-demo';
+import { PageContainer } from '@/components/page-container';
 
 export default function HomePage() {
 	return (
 		<PageContainer>
 			<div className="flex max-w-sm flex-col gap-4">
-				<Logo />
+				<BrandLogo />
+				<FormDemo />
 			</div>
 		</PageContainer>
 	);
