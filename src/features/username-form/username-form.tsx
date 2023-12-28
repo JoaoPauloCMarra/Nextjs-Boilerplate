@@ -50,11 +50,13 @@ export const UsernameForm = ({ defaultValues }: Props) => {
 							<FormLabel>Username</FormLabel>
 							<FormControl>
 								<Input
+									{...field}
 									data-testid={USERNAME_FORM_TESTIDS.inputUsername}
 									placeholder="your desired username"
 									className="lowercase"
 									inputMode="text"
-									{...field}
+									disabled={form.formState.isSubmitting}
+									readOnly={form.formState.isSubmitting}
 								/>
 							</FormControl>
 							<FormDescription>This is your public display name.</FormDescription>
@@ -68,7 +70,7 @@ export const UsernameForm = ({ defaultValues }: Props) => {
 						variant="ghost"
 						onClick={onReset}
 						data-testid={USERNAME_FORM_TESTIDS.buttonClear}
-						disabled={!form.formState.isDirty}
+						disabled={!form.formState.isDirty || form.formState.isSubmitting}
 					>
 						Clear
 					</Button>
@@ -76,7 +78,7 @@ export const UsernameForm = ({ defaultValues }: Props) => {
 						type="submit"
 						variant="default"
 						data-testid={USERNAME_FORM_TESTIDS.buttonSubmit}
-						disabled={!form.formState.isValid}
+						disabled={!form.formState.isValid || form.formState.isSubmitting}
 					>
 						Submit
 					</Button>

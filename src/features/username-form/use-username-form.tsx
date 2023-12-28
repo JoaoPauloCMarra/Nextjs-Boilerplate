@@ -1,12 +1,16 @@
+import { useSetAtom } from 'jotai';
 import { FieldValues, UseFormReturn } from 'react-hook-form';
+import { setUserInfoAtom } from '@/lib/store';
 import { useToast } from '@/components/ui/use-toast';
+import { submitUsername } from './actions';
 
 export function useUsernameForm<T extends FieldValues>(form: UseFormReturn<T, unknown, undefined>) {
 	const { toast } = useToast();
+	const setUserInfo = useSetAtom(setUserInfoAtom);
 
-	function onSubmit(values: T) {
-		// TODO: server action implementation
-		const serverResponse = { values };
+	async function onSubmit(values: T) {
+		const serverResponse = await submitUsername(values);
+		setUserInfo(serverResponse.data);
 
 		toast({
 			title: 'The server sent this back:',

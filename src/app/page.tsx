@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { baseMetadata } from '@/lib/constants';
-import HomePage from '@/pages/HomePage';
+import HomePage from '@/pages/home-page';
 
 export const metadata: Metadata = {
 	...baseMetadata,

@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { PageContainer } from '@/components/page-container';
+import { Button } from '@/components/ui/button';
 
 export default function Error({
 	error,
@@ -11,22 +12,16 @@ export default function Error({
 	reset: () => void;
 }) {
 	useEffect(() => {
-		// Log the error to an error reporting service
 		console.error(error);
 	}, [error]);
 
 	return (
 		<PageContainer>
-			<div className="flex flex-1 flex-col items-center justify-center" role="status">
+			<div className="flex flex-1 flex-col items-center justify-center gap-4" role="status">
 				<h2>Something went wrong!</h2>
-				<button
-					onClick={
-						// Attempt to recover by trying to re-render the segment
-						() => reset()
-					}
-				>
+				<Button variant="outline" onClick={reset}>
 					Try again
-				</button>
+				</Button>
 			</div>
 		</PageContainer>
 	);
