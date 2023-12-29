@@ -1,15 +1,20 @@
+![main](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+
 # Nextjs Boilerplate
 
 - Yarn
 
 - NextJs 14
-- Tailwindcss
+- Tailwindcss + shadcn
 
 - Prettier
 - Eslint
 
 - Playwright e2e test
 - Vitest unit test
+
+- React Hook Form
+- Zod
 
 src/ work in progress to add more sandbox stuff to validate the Webvitals
 
