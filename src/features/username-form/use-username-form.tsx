@@ -33,7 +33,7 @@ export function useUsernameForm<T extends FieldValues>(form: UseFormReturn<T, un
 			toast({
 				title: 'The server sent this back:',
 				description: (
-					<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+					<pre className="mt-2 w-[340px] max-w-full rounded-md bg-slate-950 p-4">
 						<code className="text-white">{JSON.stringify(json, null, 2)}</code>
 					</pre>
 				)

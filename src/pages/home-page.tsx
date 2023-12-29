@@ -18,14 +18,16 @@ export default function HomePage() {
 	return (
 		<PageContainer>
 			<div className="flex w-full max-w-sm flex-col gap-4">
-				<BrandLogo />
-				<UsernameForm />
-			</div>
-			<div className="mt-12 flex w-full max-w-sm flex-col items-center">
-				<h4>Global State:</h4>
-				<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-					<code className="text-white">{JSON.stringify(userInfo, null, 2)}</code>
-				</pre>
+				<div className="flex w-full flex-col gap-4">
+					<BrandLogo />
+					<UsernameForm />
+				</div>
+				<div className="flex w-full flex-col items-center">
+					<h4>Global State:</h4>
+					<pre className="mt-2 w-[340px] max-w-full rounded-md bg-slate-950 p-4">
+						<code className="text-white">{JSON.stringify(userInfo, null, 2)}</code>
+					</pre>
+				</div>
 			</div>
 		</PageContainer>
 	);
