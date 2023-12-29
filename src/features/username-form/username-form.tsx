@@ -1,8 +1,11 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useAtomValue } from 'jotai';
+import { Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import z from 'zod';
+import { getUserInfoAtom } from '@/lib/store';
 import { Button } from '@/components/ui/button';
 import {
 	Form,
@@ -30,11 +33,11 @@ type Props = {
 };
 
 export const UsernameForm = ({ defaultValues }: Props) => {
+	const userInfo = useAtomValue(getUserInfoAtom);
+
 	const form = useForm<FormValues>({
 		resolver: zodResolver(formSchema),
-		defaultValues: defaultValues || {
-			username: ''
-		}
+		defaultValues: defaultValues || userInfo
 	});
 
 	const { onSubmit, onReset } = useUsernameForm<FormValues>(form);
@@ -81,6 +84,11 @@ export const UsernameForm = ({ defaultValues }: Props) => {
 						disabled={!form.formState.isValid || form.formState.isSubmitting}
 					>
 						Submit
+						{form.formState.isSubmitting && (
+							<div className="ml-2 animate-spin" role="status">
+								<Loader2 size={16} />
+							</div>
+						)}
 					</Button>
 				</div>
 			</form>
