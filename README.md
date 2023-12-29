@@ -1,4 +1,4 @@
-![main](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+![main](https://github.com/JoaoPauloCMarra/Nextjs-Boilerplate/actions/workflows/main.yml/badge.svg)
 
 # Nextjs Boilerplate
 
