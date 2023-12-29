@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 
 export const APP_NAME = 'NextJS Boilerplate';
 export const BASE_URL = process.env.NEXT_PUBLIC_API_URL;

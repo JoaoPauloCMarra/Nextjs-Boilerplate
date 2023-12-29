@@ -1,6 +1,7 @@
 'use client';
 
-import { ReactEventHandler, useState } from 'react';
+import type { ReactEventHandler } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 

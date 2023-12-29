@@ -26,21 +26,21 @@ const formSchema = z.object({
 	})
 });
 
-type FormValues = z.infer<typeof formSchema>;
+export type UsernameFormValues = z.infer<typeof formSchema>;
 
 type Props = {
-	defaultValues?: FormValues;
+	defaultValues?: UsernameFormValues;
 };
 
 export const UsernameForm = ({ defaultValues }: Props) => {
 	const userInfo = useAtomValue(getUserInfoAtom);
-
-	const form = useForm<FormValues>({
+	const form = useForm<UsernameFormValues>({
 		resolver: zodResolver(formSchema),
 		defaultValues: defaultValues || userInfo
 	});
+	const { onSubmit, onReset } = useUsernameForm<UsernameFormValues>(form);
 
-	const { onSubmit, onReset } = useUsernameForm<FormValues>(form);
+	const { formState } = form;
 
 	return (
 		<Form {...form}>
@@ -58,8 +58,8 @@ export const UsernameForm = ({ defaultValues }: Props) => {
 									placeholder="your desired username"
 									className="lowercase"
 									inputMode="text"
-									disabled={form.formState.isSubmitting}
-									readOnly={form.formState.isSubmitting}
+									disabled={formState.isSubmitting}
+									readOnly={formState.isSubmitting}
 								/>
 							</FormControl>
 							<FormDescription>This is your public display name.</FormDescription>
@@ -67,13 +67,21 @@ export const UsernameForm = ({ defaultValues }: Props) => {
 						</FormItem>
 					)}
 				/>
+				{formState.errors.root?.message && (
+					<div
+						className="rounded-md bg-destructive px-4 py-2 text-sm text-destructive-foreground"
+						role="alert"
+					>
+						<span>{formState.errors.root?.message}</span>
+					</div>
+				)}
 				<div className="flex w-full justify-between">
 					<Button
 						type="reset"
 						variant="ghost"
 						onClick={onReset}
 						data-testid={USERNAME_FORM_TESTIDS.buttonClear}
-						disabled={!form.formState.isDirty || form.formState.isSubmitting}
+						disabled={!formState.isDirty || formState.isSubmitting}
 					>
 						Clear
 					</Button>
@@ -81,10 +89,10 @@ export const UsernameForm = ({ defaultValues }: Props) => {
 						type="submit"
 						variant="default"
 						data-testid={USERNAME_FORM_TESTIDS.buttonSubmit}
-						disabled={!form.formState.isValid || form.formState.isSubmitting}
+						disabled={!formState.isValid || formState.isSubmitting}
 					>
 						Submit
-						{form.formState.isSubmitting && (
+						{formState.isSubmitting && (
 							<div className="ml-2 animate-spin" role="status">
 								<Loader2 size={16} />
 							</div>

@@ -1,19 +1,35 @@
+import { waitSeconds } from '@/lib/utils';
+import type { UsernameFormValues } from '@/features/username-form/username-form';
+
 export const dynamic = 'force-dynamic';
 
-type Response = {
+type UsernamePOSTResponse = {
 	message: string;
 	data: UserInfo;
 };
 
 export async function POST(request: Request) {
-	const data = await request.json();
+	const data = (await request.json()) as UsernameFormValues;
 
-	await new Promise((resolve) => setTimeout(resolve, 5000));
+	if (data.username === 'user') {
+		return Response.json(
+			{
+				message: `Username '${data.username}' not allowed.`,
+				data: { username: '' }
+			} satisfies UsernamePOSTResponse,
+			{ status: 401 }
+		);
+	}
+
+	await waitSeconds(2);
 
 	const message = 'Username change saved.';
 
-	return Response.json({
-		message,
-		data
-	} as Response);
+	return Response.json(
+		{
+			message,
+			data
+		} satisfies UsernamePOSTResponse,
+		{ status: 200 }
+	);
 }

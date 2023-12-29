@@ -1,6 +1,6 @@
 import './globals.css';
 
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
 import { Provider } from 'jotai';
 import { Inter as FontSans } from 'next/font/google';
