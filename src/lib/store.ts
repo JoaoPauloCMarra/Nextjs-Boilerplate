@@ -1,7 +1,7 @@
 import { atom } from 'jotai';
 
 const userInfoAtom = atom<UserInfo>({
-	username: 'user'
+	username: ''
 });
 
 export const getUserInfoAtom = atom((get) => get(userInfoAtom));

@@ -13,6 +13,10 @@
 
 src/ work in progress to add more sandbox stuff to validate the Webvitals
 
+## Live app
+
+[Link to the web app](https://joaopaulocmarra-ssr.vercel.app/)
+
 ## Scripts
 
 `yarn dev` to run dev mode
