@@ -1,33 +1,26 @@
 'use client';
 
-import { useAtomValue } from 'jotai';
-import dynamic from 'next/dynamic';
-import { getUserInfoAtom } from '@/lib/store';
 import { PageContainer } from '@/components/page-container';
 
-const BrandLogo = dynamic(() =>
-	import('@/components/brand-logo').then((module) => module.BrandLogo)
-);
-const UsernameForm = dynamic(() =>
-	import('@/features/username-form').then((module) => module.UsernameForm)
-);
-
 export default function HomePage() {
-	const userInfo = useAtomValue(getUserInfoAtom);
-
 	return (
 		<PageContainer>
-			<div className="flex w-full max-w-sm flex-col gap-4">
-				<div className="flex w-full flex-col gap-4">
-					<BrandLogo />
-					<UsernameForm />
-				</div>
-				<div className="flex w-full flex-col items-center">
-					<h4>Global State:</h4>
-					<pre className="mt-2 w-[340px] max-w-full rounded-md bg-slate-950 p-4">
-						<code className="text-white">{JSON.stringify(userInfo, null, 2)}</code>
-					</pre>
-				</div>
+			<div className="flex w-full flex-col gap-4">
+				<p>
+					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum iste asperiores maiores
+					aliquam cupiditate distinctio repellat debitis quibusdam dolor laboriosam officia beatae
+					quo blanditiis ex ab sed, nesciunt accusantium totam.
+				</p>
+				<p>
+					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum iste asperiores maiores
+					aliquam cupiditate distinctio repellat debitis quibusdam dolor laboriosam officia beatae
+					quo blanditiis ex ab sed, nesciunt accusantium totam.
+				</p>
+				<p>
+					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum iste asperiores maiores
+					aliquam cupiditate distinctio repellat debitis quibusdam dolor laboriosam officia beatae
+					quo blanditiis ex ab sed, nesciunt accusantium totam.
+				</p>
 			</div>
 		</PageContainer>
 	);

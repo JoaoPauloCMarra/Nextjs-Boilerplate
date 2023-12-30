@@ -22,7 +22,7 @@ export function Toaster() {
 							{title && <ToastTitle>{title}</ToastTitle>}
 							{description && <ToastDescription>{description}</ToastDescription>}
 						</div>
-						<div className="flex w-full items-center justify-center">{action}</div>
+						{action && <div className="flex w-full items-center justify-center">{action}</div>}
 						<ToastClose />
 					</Toast>
 				);

@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 import { baseMetadata } from '@/lib/constants';
-import HomePage from '@/pages/home-page';
+import DemoFormPage from '@/pages/demo-form-page';
 
 export const metadata: Metadata = {
 	...baseMetadata,
-	title: `Home - ${baseMetadata.title}`,
+	title: `Demo Form - ${baseMetadata.title}`,
 	description: ''
 };
 
 export default function Home() {
-	return <HomePage />;
+	return <DemoFormPage />;
 }

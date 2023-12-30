@@ -34,6 +34,7 @@ src/ work in progress to add more sandbox stuff to validate the Webvitals
 `yarn lint` to run eslint on the codebase
 `yarn format` to run prettier on the codebase
 
-## Web Vitals
+## Web Vitals / Lighthouse
 
-![screenshot](./web-vitals-screenshot.png)
+<img src="./web-vitals-screenshot.png" alt="Web Vitals" width="300" />
+<img src="./lighthouse-screenshot.png" alt="Lighthouse" width="300" />
