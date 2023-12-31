@@ -6,9 +6,10 @@ import { Provider } from 'jotai';
 import dynamic from 'next/dynamic';
 import { Inter as FontSans } from 'next/font/google';
 import { baseMetadata } from '@/lib/constants';
+import GlobalStateDebugger from '@/components/global-state-debugger';
 import MainNav from '@/components/main-nav';
-import Search from '@/components/search';
 import { Toaster } from '@/components/ui/toaster';
+import { SearchForm } from '@/features/search-form';
 
 const BrandLogo = dynamic(() =>
 	import('@/components/brand-logo').then((module) => module.BrandLogo)
@@ -38,11 +39,12 @@ export default function RootLayout({ children }: PropsWithChildren) {
 								</div>
 								<MainNav />
 								<div className="ml-auto flex items-center space-x-4">
-									<Search />
+									<SearchForm />
 								</div>
 							</div>
 						</div>
-						<main>{children}</main>
+						{children}
+						<GlobalStateDebugger />
 					</div>
 					<Toaster />
 				</Provider>

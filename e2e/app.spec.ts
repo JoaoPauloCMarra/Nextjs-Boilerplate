@@ -8,8 +8,10 @@ test('has title', async ({ page }) => {
 	await expect(page).toHaveTitle(`Home - ${APP_NAME}`);
 });
 
-test('form works', async ({ page }) => {
-	await page.goto('/');
+test('demo form works', async ({ page }) => {
+	await page.goto('/demo-form');
+
+	await expect(page).toHaveTitle(`Demo Form - ${APP_NAME}`);
 
 	const inputName = page.getByTestId(USERNAME_FORM_TESTIDS.inputUsername);
 	const buttonClear = page.getByTestId(USERNAME_FORM_TESTIDS.buttonClear);

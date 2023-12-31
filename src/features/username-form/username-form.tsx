@@ -17,8 +17,8 @@ import {
 	FormMessage
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useUsernameForm } from '@/features/username-form';
 import { USERNAME_FORM_TESTIDS } from './test-ids';
+import { useUsernameForm } from './use-username-form';
 
 const formSchema = z.object({
 	username: z.string().toLowerCase().min(2, {
