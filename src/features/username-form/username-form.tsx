@@ -5,7 +5,7 @@ import { useAtomValue } from 'jotai';
 import { Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import z from 'zod';
-import { getUserInfoAtom } from '@/lib/store';
+import { getUserAtom } from '@/lib/store';
 import { Button } from '@/components/ui/button';
 import {
 	Form,
@@ -33,7 +33,7 @@ type Props = {
 };
 
 export const UsernameForm = ({ defaultValues }: Props) => {
-	const userInfo = useAtomValue(getUserInfoAtom);
+	const userInfo = useAtomValue(getUserAtom);
 	const form = useForm<UsernameFormValues>({
 		resolver: zodResolver(formSchema),
 		defaultValues: defaultValues || userInfo

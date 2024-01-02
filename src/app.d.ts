@@ -1,3 +1,3 @@
-declare type UserInfo = {
+declare type User = {
 	username: string;
 };

@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 
 type UsernamePOSTResponse = {
 	message: string;
-	data: UserInfo;
+	data: User;
 };
 
 export async function POST(request: Request) {

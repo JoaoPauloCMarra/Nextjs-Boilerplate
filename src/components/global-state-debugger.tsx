@@ -1,10 +1,10 @@
 'use client';
 
 import { useAtomValue } from 'jotai';
-import { getSearchTermAtom, getUserInfoAtom } from '@/lib/store';
+import { getSearchTermAtom, getUserAtom } from '@/lib/store';
 
 export default function GlobalStateDebugger() {
-	const userInfo = useAtomValue(getUserInfoAtom);
+	const userInfo = useAtomValue(getUserAtom);
 	const searchTerm = useAtomValue(getSearchTermAtom);
 
 	return (

@@ -3,13 +3,13 @@
 import { useRef } from 'react';
 import { useSetAtom } from 'jotai';
 import { BASE_URL } from '@/lib/constants';
-import { setUserInfoAtom } from '@/lib/store';
+import { setUserAtom } from '@/lib/store';
 import { useToast } from '@/components/ui/use-toast';
 import type { FieldValues, UseFormReturn } from 'react-hook-form';
 
 export function useUsernameForm<T extends FieldValues>(form: UseFormReturn<T, unknown, undefined>) {
 	const abortControllerRef = useRef<AbortController>(new AbortController());
-	const setUserInfo = useSetAtom(setUserInfoAtom);
+	const setUser = useSetAtom(setUserAtom);
 	const { toast } = useToast();
 
 	async function onSubmit(values: T) {
@@ -31,7 +31,7 @@ export function useUsernameForm<T extends FieldValues>(form: UseFormReturn<T, un
 				return;
 			}
 
-			setUserInfo(json.data);
+			setUser(json.data);
 
 			toast({
 				title: 'The server sent this back:',

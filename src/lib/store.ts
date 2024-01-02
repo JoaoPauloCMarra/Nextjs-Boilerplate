@@ -3,13 +3,13 @@ import { atom } from 'jotai';
 /**
  * User Information Storage
  */
-const userInfoAtom = atom<UserInfo>({
+const userInfoAtom = atom<User>({
 	username: ''
 });
 
-export const getUserInfoAtom = atom((get) => get(userInfoAtom));
+export const getUserAtom = atom((get) => get(userInfoAtom));
 
-export const setUserInfoAtom = atom(null, (_, set, update: UserInfo) => {
+export const setUserAtom = atom(null, (_, set, update: User) => {
 	set(userInfoAtom, update);
 });
 
