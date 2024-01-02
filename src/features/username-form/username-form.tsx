@@ -38,7 +38,7 @@ export const UsernameForm = ({ defaultValues }: Props) => {
 		resolver: zodResolver(formSchema),
 		defaultValues: defaultValues || userInfo
 	});
-	const { onSubmit, onReset } = useUsernameForm<UsernameFormValues>(form);
+	const { onSubmit, onReset, onCancel } = useUsernameForm<UsernameFormValues>(form);
 
 	const { formState } = form;
 
@@ -86,12 +86,13 @@ export const UsernameForm = ({ defaultValues }: Props) => {
 						Clear
 					</Button>
 					<Button
-						type="submit"
+						onClick={formState.isSubmitting ? onCancel : undefined}
+						type={formState.isSubmitting ? 'button' : 'submit'}
 						variant="default"
 						data-testid={USERNAME_FORM_TESTIDS.buttonSubmit}
-						disabled={!formState.isValid || formState.isSubmitting}
+						disabled={!formState.isValid}
 					>
-						Submit
+						{formState.isSubmitting ? 'Cancel' : 'Submit'}
 						{formState.isSubmitting && (
 							<div className="ml-2 animate-spin" role="status">
 								<Loader2 size={16} />

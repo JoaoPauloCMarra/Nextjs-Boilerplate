@@ -10,6 +10,7 @@ export function useSearchForm() {
 
 	const onClear = () => {
 		setTerm('');
+		setInputTerm('');
 	};
 
 	const onSubmit = (term: string) => {

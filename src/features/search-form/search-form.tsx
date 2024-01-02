@@ -20,7 +20,7 @@ export const SearchForm = () => {
 				data-testid={SEARCH_FORM_TESTIDS.inputTerm}
 			/>
 			{inputTerm.length > 0 && (
-				<div className="absolute right-2 top-3 text-red-500 ease-linear animate-in motion-safe:fade-in">
+				<div className="absolute right-2 top-3 z-10 text-red-500 ease-linear animate-in motion-safe:fade-in">
 					<XIcon onClick={onClear} size={18} data-testid={SEARCH_FORM_TESTIDS.buttonClear} />
 				</div>
 			)}

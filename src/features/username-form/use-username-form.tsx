@@ -1,5 +1,6 @@
 'use client';
 
+import { useRef } from 'react';
 import { useSetAtom } from 'jotai';
 import { BASE_URL } from '@/lib/constants';
 import { setUserInfoAtom } from '@/lib/store';
@@ -7,6 +8,7 @@ import { useToast } from '@/components/ui/use-toast';
 import type { FieldValues, UseFormReturn } from 'react-hook-form';
 
 export function useUsernameForm<T extends FieldValues>(form: UseFormReturn<T, unknown, undefined>) {
+	const abortControllerRef = useRef<AbortController>(new AbortController());
 	const setUserInfo = useSetAtom(setUserInfoAtom);
 	const { toast } = useToast();
 
@@ -15,7 +17,8 @@ export function useUsernameForm<T extends FieldValues>(form: UseFormReturn<T, un
 			const response = await fetch(`${BASE_URL}/api/username`, {
 				method: 'POST',
 				cache: 'no-cache',
-				body: JSON.stringify(values)
+				body: JSON.stringify(values),
+				signal: abortControllerRef.current?.signal
 			});
 
 			const json = await response.json();
@@ -39,10 +42,19 @@ export function useUsernameForm<T extends FieldValues>(form: UseFormReturn<T, un
 				)
 			});
 		} catch (error) {
-			form.setError('root', {
-				type: '500',
-				message: String(error)
-			});
+			if (error instanceof Error && error.name === 'AbortError') {
+				form.setError('root', {
+					type: '500',
+					message: 'request canceled'
+				});
+			} else {
+				form.setError('root', {
+					type: '500',
+					message: String(error)
+				});
+			}
+		} finally {
+			abortControllerRef.current = new AbortController();
 		}
 	}
 
@@ -50,8 +62,13 @@ export function useUsernameForm<T extends FieldValues>(form: UseFormReturn<T, un
 		form.reset();
 	};
 
+	const onCancel = () => {
+		abortControllerRef.current?.abort();
+	};
+
 	return {
 		onSubmit,
-		onReset
+		onReset,
+		onCancel
 	};
 }
