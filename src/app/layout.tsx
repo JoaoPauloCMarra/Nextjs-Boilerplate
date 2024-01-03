@@ -8,7 +8,7 @@ import { Inter as FontSans } from 'next/font/google';
 import { baseMetadata } from '@/lib/constants';
 import GlobalStateDebugger from '@/components/global-state-debugger';
 import MainNav from '@/components/main-nav';
-import { Toaster } from '@/components/ui/toaster';
+import { Toaster } from '@/components/primitives/toaster';
 import { SearchForm } from '@/features/search-form';
 
 const BrandLogo = dynamic(() =>

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { baseMetadata } from '@/lib/constants';
+import { waitSeconds } from '@/lib/utils';
 import DemoFormPage from '@/pages/demo-form-page';
 
 export const metadata: Metadata = {
@@ -8,6 +9,8 @@ export const metadata: Metadata = {
 	description: ''
 };
 
-export default function Home() {
+export default async function DemoForm() {
+	await waitSeconds(1);
+
 	return <DemoFormPage />;
 }

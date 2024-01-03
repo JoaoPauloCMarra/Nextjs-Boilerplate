@@ -6,7 +6,7 @@ import { Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import z from 'zod';
 import { getUserAtom } from '@/lib/store';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/primitives/button';
 import {
 	Form,
 	FormControl,
@@ -15,8 +15,8 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+} from '@/components/primitives/form';
+import { Input } from '@/components/primitives/input';
 import { USERNAME_FORM_TESTIDS } from './test-ids';
 import { useUsernameForm } from './use-username-form';
 

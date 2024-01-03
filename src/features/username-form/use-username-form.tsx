@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { useSetAtom } from 'jotai';
 import { BASE_URL } from '@/lib/constants';
 import { setUserAtom } from '@/lib/store';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/components/primitives/use-toast';
 import type { FieldValues, UseFormReturn } from 'react-hook-form';
 
 export function useUsernameForm<T extends FieldValues>(form: UseFormReturn<T, unknown, undefined>) {

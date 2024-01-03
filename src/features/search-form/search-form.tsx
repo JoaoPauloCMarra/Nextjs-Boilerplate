@@ -1,7 +1,7 @@
 'use client';
 
 import { XIcon } from 'lucide-react';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/components/primitives/input';
 import { SEARCH_FORM_TESTIDS } from './test-ids';
 import { useSearchForm } from './use-search-form';
 
