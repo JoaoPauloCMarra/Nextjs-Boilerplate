@@ -25,11 +25,8 @@ export const metadata: Metadata = baseMetadata;
 
 export default function RootLayout({ children }: PropsWithChildren) {
 	return (
-		<html lang="en" className={fontSans.variable}>
-			<body
-				className="min-h-screen bg-background font-sans text-foreground antialiased"
-				suppressHydrationWarning
-			>
+		<html lang="en" className={fontSans.variable} suppressHydrationWarning>
+			<body className="min-h-screen bg-background font-sans text-foreground antialiased">
 				<Provider>
 					<div className="relative flex min-h-screen flex-col bg-background">
 						<div className="border-b">
