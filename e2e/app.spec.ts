@@ -5,23 +5,26 @@ import { USERNAME_FORM_TESTIDS } from '@/features/username-form/test-ids';
 test('has title', async ({ page }) => {
 	await page.goto('/');
 
+	await page.waitForSelector('main[style="opacity: 1;"]');
+
 	await expect(page).toHaveTitle(`Home - ${APP_NAME}`);
 });
 
 test('demo form works', async ({ page }) => {
 	await page.goto('/demo-form');
 
+	await page.waitForSelector('main[style="opacity: 1;"]');
+
 	await expect(page).toHaveTitle(`Demo Form - ${APP_NAME}`);
 
 	const inputName = page.getByTestId(USERNAME_FORM_TESTIDS.inputUsername);
-	const buttonClear = page.getByTestId(USERNAME_FORM_TESTIDS.buttonClear);
-	const buttonSubmit = page.getByTestId(USERNAME_FORM_TESTIDS.buttonSubmit);
-
 	expect(inputName).toBeTruthy();
+	const buttonClear = page.getByTestId(USERNAME_FORM_TESTIDS.buttonClear);
 	expect(buttonClear).toBeTruthy();
+	const buttonSubmit = page.getByTestId(USERNAME_FORM_TESTIDS.buttonSubmit);
 	expect(buttonSubmit).toBeTruthy();
 
-	await inputName.fill('jota');
+	await inputName.pressSequentially('jota');
 
 	expect(inputName).toHaveValue('jota');
 
