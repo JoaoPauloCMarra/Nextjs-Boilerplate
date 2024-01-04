@@ -3,18 +3,18 @@ import { cn } from '@/lib/utils';
 import Icon from '@/icons/brand.svg';
 
 type Props = {
-	size?: number;
+	className?: string;
 };
 
-export const BrandLogo = ({ size }: Props) => (
+export const BrandLogo = ({ className }: Props) => (
 	<div className="flex flex-col items-center">
-		<div className="rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 p-2">
+		<div className={cn('rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 p-2', className)}>
 			<Image
 				src={Icon.src}
-				className={cn('svg-white size-10', size && `size-${size}`)}
+				className="svg-white size-full"
 				alt="Home Icon"
-				height={size || Icon.height}
-				width={size || Icon.width}
+				height={Icon.height}
+				width={Icon.width}
 			/>
 		</div>
 	</div>

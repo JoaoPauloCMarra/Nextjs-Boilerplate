@@ -4,8 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useAtomValue } from 'jotai';
 import { Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
-import z from 'zod';
 import { getUserAtom } from '@/lib/store';
+import type { UsernameFormSubmit } from '@/app/actions/username';
 import { Button } from '@/components/primitives/button';
 import {
 	Form,
@@ -19,26 +19,21 @@ import {
 import { Input } from '@/components/primitives/input';
 import { USERNAME_FORM_TESTIDS } from './test-ids';
 import { useUsernameForm } from './use-username-form';
-
-const formSchema = z.object({
-	username: z.string().toLowerCase().min(2, {
-		message: 'Username must be at least 2 characters.'
-	})
-});
-
-export type UsernameFormValues = z.infer<typeof formSchema>;
+import type { UsernameFormValues } from './utils';
+import { formSchema } from './utils';
 
 type Props = {
+	action: UsernameFormSubmit;
 	defaultValues?: UsernameFormValues;
 };
 
-export const UsernameForm = ({ defaultValues }: Props) => {
+export const UsernameForm = (props: Props) => {
 	const userInfo = useAtomValue(getUserAtom);
 	const form = useForm<UsernameFormValues>({
 		resolver: zodResolver(formSchema),
-		defaultValues: defaultValues || userInfo
+		defaultValues: props.defaultValues || userInfo
 	});
-	const { onSubmit, onReset, onCancel } = useUsernameForm<UsernameFormValues>(form);
+	const { isPending, onSubmit, onReset, onCancel } = useUsernameForm(form, props.action);
 
 	const { formState } = form;
 
@@ -58,11 +53,11 @@ export const UsernameForm = ({ defaultValues }: Props) => {
 									placeholder="your desired username"
 									className="lowercase"
 									inputMode="text"
-									disabled={formState.isSubmitting}
-									readOnly={formState.isSubmitting}
+									disabled={isPending}
+									readOnly={isPending}
 								/>
 							</FormControl>
-							<FormDescription>This is your public display name.</FormDescription>
+							<FormDescription>{`try 'user' or 'error'.`}</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}
@@ -81,19 +76,19 @@ export const UsernameForm = ({ defaultValues }: Props) => {
 						variant="ghost"
 						onClick={onReset}
 						data-testid={USERNAME_FORM_TESTIDS.buttonClear}
-						disabled={!formState.isDirty || formState.isSubmitting}
+						disabled={!formState.isDirty || isPending}
 					>
 						Clear
 					</Button>
 					<Button
-						onClick={formState.isSubmitting ? onCancel : undefined}
-						type={formState.isSubmitting ? 'button' : 'submit'}
+						onClick={isPending ? onCancel : undefined}
+						type={isPending ? 'button' : 'submit'}
 						variant="default"
 						data-testid={USERNAME_FORM_TESTIDS.buttonSubmit}
 						disabled={!formState.isValid}
 					>
-						{formState.isSubmitting ? 'Cancel' : 'Submit'}
-						{formState.isSubmitting && (
+						{isPending ? 'Cancel' : 'Submit'}
+						{isPending && (
 							<div className="ml-2 animate-spin" role="status">
 								<Loader2 size={16} />
 							</div>

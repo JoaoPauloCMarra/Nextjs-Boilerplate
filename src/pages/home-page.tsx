@@ -36,7 +36,7 @@ export default function HomePage() {
 					variants={blocksAnimationStates}
 					initial="hidden"
 					animate="show"
-					className="flex aspect-square items-center justify-center gap-4 rounded-lg bg-slate-800 md:gap-10"
+					className="flex aspect-square items-center justify-center gap-4 overflow-hidden rounded-lg bg-slate-800 md:gap-10"
 				>
 					<motion.div
 						className="h-20 w-20 rounded-lg bg-stone-100"
@@ -90,7 +90,7 @@ export default function HomePage() {
 				>
 					<div className="aspect-square w-40 rounded-xl bg-gray-50/20">
 						<motion.div
-							className="h-full w-full origin-bottom rounded-xl bg-gray-400"
+							className="h-full w-full origin-bottom overflow-hidden rounded-xl bg-gray-400"
 							style={{ scaleY: scrollYProgress }}
 						/>
 					</div>

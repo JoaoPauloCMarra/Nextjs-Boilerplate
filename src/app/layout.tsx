@@ -30,12 +30,12 @@ export default function RootLayout({ children }: PropsWithChildren) {
 				<Provider>
 					<div className="relative flex min-h-screen flex-col">
 						<div className="border-b">
-							<div className="flex h-16 items-center px-4">
-								<div className="mr-4">
-									<BrandLogo size={22} />
+							<div className="flex flex-col items-center justify-center p-4 md:h-16 md:flex-row md:py-0">
+								<div className="mb-6 md:mb-0 md:mr-4">
+									<BrandLogo className="size-12" />
 								</div>
 								<MainNav />
-								<div className="ml-auto flex items-center space-x-4">
+								<div className="ml-auto mt-6 flex w-full items-center md:mt-0 md:w-auto md:space-x-4">
 									<SearchForm />
 								</div>
 							</div>
