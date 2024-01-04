@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server';
 export function middleware(request: NextRequest) {
 	const allCookies = request.cookies.getAll();
 	if (allCookies.length) {
-		console.log('All Cookies: ', allCookies);
+		// console.log('All Cookies: ', allCookies);
 	}
 
 	return NextResponse.next();

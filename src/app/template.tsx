@@ -1,10 +1,28 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
+
+const mainAnimationStates: Variants = {
+	hidden: { opacity: 0 },
+	show: {
+		opacity: 1,
+		transition: {
+			staggerChildren: 0.25
+		}
+	}
+};
+
 export default function Template({ children }: { children: React.ReactNode }) {
 	return (
-		<main
+		<motion.main
 			data-testid="template"
-			className="flex flex-1 flex-col duration-150 ease-linear animate-in motion-safe:fade-in"
+			className="flex flex-1 flex-col"
+			variants={mainAnimationStates}
+			initial="hidden"
+			animate="show"
 		>
 			{children}
-		</main>
+		</motion.main>
 	);
 }

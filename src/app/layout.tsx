@@ -28,7 +28,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 		<html lang="en" className={fontSans.variable} suppressHydrationWarning>
 			<body className="min-h-screen bg-background font-sans text-foreground antialiased">
 				<Provider>
-					<div className="relative flex min-h-screen flex-col bg-background">
+					<div className="relative flex min-h-screen flex-col">
 						<div className="border-b">
 							<div className="flex h-16 items-center px-4">
 								<div className="mr-4">
