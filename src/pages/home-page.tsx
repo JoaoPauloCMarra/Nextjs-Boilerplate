@@ -31,12 +31,12 @@ export default function HomePage() {
 
 	return (
 		<div className="container flex h-full w-full flex-1 flex-col items-center overflow-x-hidden py-4">
-			<div className="grid w-full flex-1 grid-cols-2 gap-10 p-10">
+			<div className="grid w-full flex-1 grid-cols-1 gap-4 p-4 md:grid-cols-2 md:gap-10 md:p-10">
 				<motion.div
 					variants={blocksAnimationStates}
 					initial="hidden"
 					animate="show"
-					className="flex aspect-square items-center justify-center gap-10 rounded-lg bg-slate-800"
+					className="flex aspect-square items-center justify-center gap-4 rounded-lg bg-slate-800 md:gap-10"
 				>
 					<motion.div
 						className="h-20 w-20 rounded-lg bg-stone-100"
@@ -55,7 +55,7 @@ export default function HomePage() {
 					variants={blocksAnimationStates}
 					initial="hidden"
 					animate="show"
-					className="flex aspect-square items-center justify-center gap-10 rounded-lg bg-slate-800"
+					className="flex aspect-square items-center justify-center gap-4 rounded-lg bg-slate-800 md:gap-10"
 				>
 					<motion.div
 						className="h-1/3 w-1/3 bg-rose-400 shadow-md"
@@ -71,10 +71,10 @@ export default function HomePage() {
 					variants={blocksAnimationStates}
 					initial="hidden"
 					animate="show"
-					className="flex aspect-square items-center justify-center gap-10 rounded-lg bg-slate-800"
+					className="flex aspect-square items-center justify-center gap-4 rounded-lg bg-slate-800 md:gap-10"
 				>
 					<motion.button
-						className="w-1/2 rounded-lg bg-emerald-700 py-4 text-2xl font-light tracking-wide text-gray-100"
+						className="w-1/2 rounded-lg bg-emerald-700 py-4 text-lg font-light tracking-wide text-gray-100 md:text-2xl"
 						whileTap={{ scale: 0.9 }}
 						whileHover={{ scale: 1.1 }}
 						transition={{ bounceDamping: 10, bounceStiffness: 600 }}
@@ -86,7 +86,7 @@ export default function HomePage() {
 					variants={blocksAnimationStates}
 					initial="hidden"
 					animate="show"
-					className="flex aspect-square items-center justify-center gap-10 rounded-lg bg-slate-800"
+					className="flex aspect-square items-center justify-center gap-4 rounded-lg bg-slate-800 md:gap-10"
 				>
 					<div className="aspect-square w-40 rounded-xl bg-gray-50/20">
 						<motion.div
@@ -99,21 +99,23 @@ export default function HomePage() {
 					variants={blocksAnimationStates}
 					initial="hidden"
 					animate="show"
-					className="flex aspect-square items-center justify-center gap-10 rounded-lg bg-slate-800"
+					className="flex aspect-square items-center justify-center gap-4 rounded-lg bg-slate-800 md:gap-10"
 					ref={dragConstrainRef}
 				>
 					<motion.div
-						className="h-1/3 w-1/3 cursor-grab rounded-3xl bg-orange-500"
+						className="flex h-1/3 w-1/3 cursor-grab items-center justify-center rounded-3xl bg-orange-500 font-bold text-black"
 						drag
 						dragConstraints={dragConstrainRef}
 						dragTransition={{ bounceDamping: 10, bounceStiffness: 600 }}
-					/>
+					>
+						DRAG
+					</motion.div>
 				</motion.div>
 				<motion.div
 					variants={blocksAnimationStates}
 					initial="hidden"
 					animate="show"
-					className="flex aspect-square items-center justify-center gap-10 rounded-lg bg-slate-800"
+					className="flex aspect-square items-center justify-center gap-4 rounded-lg bg-slate-800 md:gap-10"
 				>
 					<motion.svg
 						xmlns="http://www.w3.org/2000/svg"

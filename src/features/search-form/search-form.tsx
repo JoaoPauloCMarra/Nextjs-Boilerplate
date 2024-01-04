@@ -1,9 +1,16 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { XIcon } from 'lucide-react';
 import { Input } from '@/components/primitives/input';
 import { SEARCH_FORM_TESTIDS } from './test-ids';
 import { useSearchForm } from './use-search-form';
+import type { Variants } from 'framer-motion';
+
+const clearButtonVariants: Variants = {
+	hidden: { opacity: 0 },
+	show: { opacity: 1 }
+};
 
 export const SearchForm = () => {
 	const { inputTerm, onKeyDown, onChange, onClear } = useSearchForm();
@@ -19,11 +26,15 @@ export const SearchForm = () => {
 				onChange={onChange}
 				data-testid={SEARCH_FORM_TESTIDS.inputTerm}
 			/>
-			{inputTerm.length > 0 && (
-				<div className="absolute right-2 top-3 z-10 text-red-500 ease-linear animate-in motion-safe:fade-in">
-					<XIcon onClick={onClear} size={18} data-testid={SEARCH_FORM_TESTIDS.buttonClear} />
-				</div>
-			)}
+
+			<motion.div
+				className="absolute right-2 top-3 z-10 text-red-500"
+				variants={clearButtonVariants}
+				initial="hidden"
+				animate={inputTerm.length > 0 ? 'show' : 'hidden'}
+			>
+				<XIcon onClick={onClear} size={18} data-testid={SEARCH_FORM_TESTIDS.buttonClear} />
+			</motion.div>
 		</div>
 	);
 };
