@@ -12,7 +12,7 @@ const clearButtonVariants: Variants = {
 	show: { opacity: 1 }
 };
 
-export const SearchForm = () => {
+export default function SearchForm() {
 	const { inputTerm, onKeyDown, onChange, onClear } = useSearchForm();
 
 	return (
@@ -37,4 +37,4 @@ export const SearchForm = () => {
 			</motion.div>
 		</div>
 	);
-};
+}

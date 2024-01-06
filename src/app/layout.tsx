@@ -11,9 +11,7 @@ import MainNav from '@/components/main-nav';
 import { Toaster } from '@/components/primitives/toaster';
 import { SearchForm } from '@/features/search-form';
 
-const BrandLogo = dynamic(() =>
-	import('@/components/brand-logo').then((module) => module.BrandLogo)
-);
+const BrandLogo = dynamic(() => import('@/components/brand-logo'));
 
 const fontSans = FontSans({
 	subsets: ['latin'],
@@ -26,7 +24,10 @@ export const metadata: Metadata = baseMetadata;
 export default function RootLayout({ children }: PropsWithChildren) {
 	return (
 		<html lang="en" className={fontSans.variable} suppressHydrationWarning>
-			<body className="min-h-screen bg-background font-sans text-foreground antialiased">
+			<body
+				className="min-h-screen bg-background font-sans text-foreground antialiased"
+				suppressHydrationWarning
+			>
 				<Provider>
 					<div className="relative flex min-h-screen flex-col">
 						<div className="border-b">

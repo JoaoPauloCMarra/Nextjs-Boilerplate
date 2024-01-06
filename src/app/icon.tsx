@@ -11,7 +11,7 @@ export const size = {
 export const contentType = 'icon/svg';
 
 // Image generation
-export default function Icon() {
+export default function Favicon() {
 	return new ImageResponse(
 		(
 			// ImageResponse JSX element

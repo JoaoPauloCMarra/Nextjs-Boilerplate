@@ -12,7 +12,7 @@ type Props = {
 	width?: number;
 };
 
-export const Picture = ({ src, height, width, alt }: Props) => {
+export default function Picture({ src, height, width, alt }: Props) {
 	const [loaded, setLoaded] = useState(false);
 	const [error, setError] = useState(false);
 
@@ -48,4 +48,4 @@ export const Picture = ({ src, height, width, alt }: Props) => {
 			/>
 		</div>
 	);
-};
+}

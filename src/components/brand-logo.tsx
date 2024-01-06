@@ -6,16 +6,18 @@ type Props = {
 	className?: string;
 };
 
-export const BrandLogo = ({ className }: Props) => (
-	<div className="flex flex-col items-center">
-		<div className={cn('rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 p-2', className)}>
-			<Image
-				src={Icon.src}
-				className="svg-white size-full"
-				alt="Home Icon"
-				height={Icon.height}
-				width={Icon.width}
-			/>
+export default function BrandLogo({ className }: Props) {
+	return (
+		<div className="flex flex-col items-center">
+			<div className={cn('rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 p-2', className)}>
+				<Image
+					src={Icon.src}
+					className="svg-white size-full"
+					alt="Home Icon"
+					height={Icon.height}
+					width={Icon.width}
+				/>
+			</div>
 		</div>
-	</div>
-);
+	);
+}

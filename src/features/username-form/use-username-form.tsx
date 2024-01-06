@@ -1,36 +1,44 @@
 'use client';
 
 import { useRef, useTransition } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useSetAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
+import { useForm } from 'react-hook-form';
 import { setUserAtom } from '@/lib/store';
+import { getUserAtom } from '@/lib/store';
 import type { UsernameFormSubmit } from '@/app/actions/username';
 import { useToast } from '@/components/primitives/use-toast';
 import type { UsernameFormValues } from './utils';
-import type { UseFormReturn } from 'react-hook-form';
+import { formSchema } from './utils';
 
-export function useUsernameForm(
-	form: UseFormReturn<UsernameFormValues, unknown, undefined>,
-	action: UsernameFormSubmit
-) {
+export type UseUsernameFormProps = {
+	action: UsernameFormSubmit;
+	defaultValues?: UsernameFormValues;
+};
+
+export function useUsernameForm(props: UseUsernameFormProps) {
 	const abortControllerRef = useRef<AbortController>(new AbortController());
+	const [isSubimitting, startTransition] = useTransition();
 	const setUser = useSetAtom(setUserAtom);
-	const [isPending, startTransition] = useTransition();
+	const userInfo = useAtomValue(getUserAtom);
+	const form = useForm<UsernameFormValues>({
+		resolver: zodResolver(formSchema),
+		defaultValues: props.defaultValues || userInfo
+	});
+
 	const { toast } = useToast();
 
-	async function onSubmit(data: UsernameFormValues) {
+	const onSubmit = async (data: UsernameFormValues) => {
 		startTransition(async () => {
 			try {
-				const result = await action({ data });
+				const result = await props.action({ data });
 
 				if (result.data) {
 					setUser(result.data);
+					form.reset(data);
 					toast({
-						title: 'The server sent this back:',
-						description: (
-							<pre className="mt-2 w-[340px] max-w-full rounded-md bg-slate-950 p-4">
-								<code className="text-white">{JSON.stringify(result, null, 2)}</code>
-							</pre>
-						)
+						description: `Your new username is "${result.data.username}"`
 					});
 				} else {
 					form.setError('root', {
@@ -45,7 +53,7 @@ export function useUsernameForm(
 				});
 			}
 		});
-	}
+	};
 
 	const onReset = () => {
 		form.reset();
@@ -56,7 +64,8 @@ export function useUsernameForm(
 	};
 
 	return {
-		isPending,
+		form,
+		isSubimitting,
 
 		onSubmit,
 		onReset,

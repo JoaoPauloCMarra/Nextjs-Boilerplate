@@ -1,11 +1,8 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useAtomValue } from 'jotai';
-import { Loader2 } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { getUserAtom } from '@/lib/store';
-import type { UsernameFormSubmit } from '@/app/actions/username';
+import { Suspense } from 'react';
+import dynamic from 'next/dynamic';
+import { cn } from '@/lib/utils';
 import { Button } from '@/components/primitives/button';
 import {
 	Form,
@@ -18,24 +15,16 @@ import {
 } from '@/components/primitives/form';
 import { Input } from '@/components/primitives/input';
 import { USERNAME_FORM_TESTIDS } from './test-ids';
+import type { UseUsernameFormProps } from './use-username-form';
 import { useUsernameForm } from './use-username-form';
-import type { UsernameFormValues } from './utils';
-import { formSchema } from './utils';
 
-type Props = {
-	action: UsernameFormSubmit;
-	defaultValues?: UsernameFormValues;
-};
+const Loader2 = dynamic(() => import('lucide-react').then((module) => module.Loader2));
 
-export const UsernameForm = (props: Props) => {
-	const userInfo = useAtomValue(getUserAtom);
-	const form = useForm<UsernameFormValues>({
-		resolver: zodResolver(formSchema),
-		defaultValues: props.defaultValues || userInfo
-	});
-	const { isPending, onSubmit, onReset, onCancel } = useUsernameForm(form, props.action);
-
-	const { formState } = form;
+export default function UsernameForm(props: UseUsernameFormProps) {
+	const { form, isSubimitting, onSubmit, onReset, onCancel } = useUsernameForm(props);
+	const {
+		formState: { errors, isDirty, isValid }
+	} = form;
 
 	return (
 		<Form {...form}>
@@ -53,8 +42,8 @@ export const UsernameForm = (props: Props) => {
 									placeholder="your desired username"
 									className="lowercase"
 									inputMode="text"
-									disabled={isPending}
-									readOnly={isPending}
+									disabled={isSubimitting}
+									readOnly={isSubimitting}
 								/>
 							</FormControl>
 							<FormDescription>{`try 'user' or 'error'.`}</FormDescription>
@@ -62,12 +51,12 @@ export const UsernameForm = (props: Props) => {
 						</FormItem>
 					)}
 				/>
-				{formState.errors.root?.message && (
+				{errors.root?.message && (
 					<div
 						className="rounded-md bg-destructive px-4 py-2 text-sm text-destructive-foreground"
 						role="alert"
 					>
-						<span>{formState.errors.root?.message}</span>
+						<span>{errors.root?.message}</span>
 					</div>
 				)}
 				<div className="flex w-full justify-between">
@@ -76,26 +65,28 @@ export const UsernameForm = (props: Props) => {
 						variant="ghost"
 						onClick={onReset}
 						data-testid={USERNAME_FORM_TESTIDS.buttonClear}
-						disabled={!formState.isDirty || isPending}
+						disabled={!isDirty || isSubimitting}
 					>
 						Clear
 					</Button>
 					<Button
-						onClick={isPending ? onCancel : undefined}
-						type={isPending ? 'button' : 'submit'}
+						onClick={isSubimitting ? onCancel : undefined}
+						type={isSubimitting ? 'button' : 'submit'}
 						variant="default"
 						data-testid={USERNAME_FORM_TESTIDS.buttonSubmit}
-						disabled={!formState.isValid}
+						disabled={!isValid || !isDirty}
 					>
-						{isPending ? 'Cancel' : 'Submit'}
-						{isPending && (
-							<div className="ml-2 animate-spin" role="status">
-								<Loader2 size={16} />
-							</div>
-						)}
+						{isSubimitting ? 'Cancel' : 'Submit'}
+						<Suspense fallback={null}>
+							<Loader2
+								size={16}
+								role="status"
+								className={cn('ml-1 animate-spin', isSubimitting ? 'inline-block' : 'hidden')}
+							/>
+						</Suspense>
 					</Button>
 				</div>
 			</form>
 		</Form>
 	);
-};
+}
