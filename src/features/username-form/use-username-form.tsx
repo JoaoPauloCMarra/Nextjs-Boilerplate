@@ -38,7 +38,8 @@ export function useUsernameForm(props: UseUsernameFormProps) {
 					setUser(result.data);
 					form.reset(data);
 					toast({
-						description: `Your new username is "${result.data.username}"`
+						description: `Your new username is "${result.data.username}"`,
+						variant: 'successful'
 					});
 				} else {
 					form.setError('root', {

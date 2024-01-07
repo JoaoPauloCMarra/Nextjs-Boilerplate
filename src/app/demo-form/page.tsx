@@ -1,11 +1,20 @@
-import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { baseMetadata } from '@/lib/constants';
+import { waitSeconds } from '@/lib/utils';
 import { usernameFormSubmit } from '@/app/actions/username';
+import UsernameFormSkeleton from '@/features/username-form/skeleton';
 
-const UsernameForm = dynamic(() =>
-	import('@/features/username-form').then((module) => module.UsernameForm)
+const UsernameForm = dynamic(
+	async () => {
+		await waitSeconds(2);
+		return import('@/features/username-form').then((module) => module.UsernameForm);
+	},
+	{
+		loading: () => {
+			return <UsernameFormSkeleton />;
+		}
+	}
 );
 
 export const metadata: Metadata = {
@@ -15,12 +24,11 @@ export const metadata: Metadata = {
 };
 
 export default async function DemoForm() {
+	await waitSeconds(2);
 	return (
 		<div className="container flex flex-1 flex-col items-center py-4 md:gap-4">
 			<div className="flex w-full flex-col md:w-80 md:gap-4">
-				<Suspense fallback={null}>
-					<UsernameForm action={usernameFormSubmit} />
-				</Suspense>
+				<UsernameForm action={usernameFormSubmit} />
 			</div>
 		</div>
 	);
