@@ -1,7 +1,12 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, userAgent } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
+	const { isBot } = userAgent(request);
+	if (isBot) {
+		console.log('request from bot');
+	}
+
 	const allCookies = request.cookies.getAll();
 	if (allCookies.length) {
 		// console.log('All Cookies: ', allCookies);

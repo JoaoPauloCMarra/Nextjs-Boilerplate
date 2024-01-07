@@ -1,7 +1,7 @@
 import './globals.css';
 
 import type { PropsWithChildren } from 'react';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Provider } from 'jotai';
 import dynamic from 'next/dynamic';
 import { Inter as FontSans } from 'next/font/google';
@@ -18,6 +18,19 @@ const fontSans = FontSans({
 	variable: '--font-sans',
 	display: 'swap'
 });
+
+export function generateViewport() {
+	const config: Viewport = {
+		themeColor: 'black',
+		width: 'device-width',
+		initialScale: 1,
+		maximumScale: 1,
+		viewportFit: 'cover',
+		colorScheme: 'dark'
+	};
+
+	return config;
+}
 
 export const metadata: Metadata = baseMetadata;
 

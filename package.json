@@ -14,6 +14,13 @@
 		"prepare": "husky install",
 		"shadcn-add": "npx shadcn-ui@latest add"
 	},
+	"browserslist": [
+		"chrome 64",
+		"edge 79",
+		"firefox 67",
+		"opera 51",
+		"safari 12"
+	],
 	"engines": {
 		"node": ">=18.17.0",
 		"yarn": ">=1.2.19"
