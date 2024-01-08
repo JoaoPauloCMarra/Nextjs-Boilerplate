@@ -16,7 +16,7 @@ import {
 import { Input } from '@/components/primitives/input';
 import { USERNAME_FORM_TESTIDS } from './test-ids';
 import type { UseUsernameFormProps } from './use-username-form';
-import { useUsernameForm } from './use-username-form';
+import useUsernameForm from './use-username-form';
 
 const Loader2 = dynamic(() => import('lucide-react').then((module) => module.Loader2));
 

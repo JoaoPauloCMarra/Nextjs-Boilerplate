@@ -17,7 +17,7 @@ export type UseUsernameFormProps = {
 	defaultValues?: UsernameFormValues;
 };
 
-export function useUsernameForm(props: UseUsernameFormProps) {
+export default function useUsernameForm(props: UseUsernameFormProps) {
 	const abortControllerRef = useRef<AbortController>(new AbortController());
 	const [isSubimitting, startTransition] = useTransition();
 	const setUser = useSetAtom(setUserAtom);

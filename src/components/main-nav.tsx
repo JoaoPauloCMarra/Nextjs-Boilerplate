@@ -15,6 +15,10 @@ const MENU_ITEMS = [
 	{
 		label: 'Demo Form',
 		href: '/demo-form'
+	},
+	{
+		label: 'Demo Modal',
+		href: '/demo-modal'
 	}
 ] as const;
 
