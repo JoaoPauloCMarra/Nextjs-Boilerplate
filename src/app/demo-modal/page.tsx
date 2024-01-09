@@ -1,18 +1,16 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { baseMetadata } from '@/lib/constants';
-import { waitSeconds } from '@/lib/utils';
 import { InformationModalSkeleton } from '@/features/information-modal';
 
 export const metadata: Metadata = {
 	...baseMetadata,
-	title: `Demo Form - ${baseMetadata.title}`,
+	title: `Demo Modal - ${baseMetadata.title}`,
 	description: ''
 };
 
 const InformationModal = dynamic(
 	async () => {
-		await waitSeconds(2);
 		return import('@/features/information-modal').then((module) => module.InformationModal);
 	},
 	{

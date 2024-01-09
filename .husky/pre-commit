@@ -4,5 +4,4 @@
 bun run format
 bun run lint
 bun run test:unit run
-bun run test:e2e
 git add .

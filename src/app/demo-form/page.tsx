@@ -1,13 +1,11 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { baseMetadata } from '@/lib/constants';
-import { waitSeconds } from '@/lib/utils';
 import { usernameFormSubmit } from '@/app/actions/username';
 import { UsernameFormSkeleton } from '@/features/username-form';
 
 const UsernameForm = dynamic(
 	async () => {
-		await waitSeconds(2);
 		return import('@/features/username-form').then((module) => module.UsernameForm);
 	},
 	{

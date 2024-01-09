@@ -58,9 +58,6 @@
 	input[type='search']::-webkit-search-results-decoration {
 		display: none;
 	}
-	input {
-		touch-action: manipulation;
-	}
 }
 
 @layer utilities {
