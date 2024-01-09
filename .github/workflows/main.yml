@@ -12,13 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: oven-sh/setup-bun@v1
         with:
-          node-version: 18
-          cache: 'yarn'
+          bun-version: latest
 
       - name: Install dependencies
-        run: npm install -g yarn && yarn install --immutable
+        run: bun install
 
   #  Unit and E2E Test
   test:
@@ -28,25 +27,25 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: oven-sh/setup-bun@v1
         with:
-          node-version: 18
-          cache: 'yarn'
+          bun-version: latest
 
       - name: Install dependencies
-        run: npm install -g yarn && yarn install --immutable
+        run: bun install
 
-      - name: Install Playwright Browsers
-        run: yarn playwright install --with-deps
 
       - name: Build
-        run: yarn build
+        run: bun run build
 
       - name: Running Unit Tests
-        run: yarn test:unit
+        run: bun test:unit run
+
+      - name: Install Playwright Browsers
+        run: bun playwright install --with-deps
 
       - name: Run Playwright tests
-        run: yarn playwright test
+        run: bun test:e2e
 
       - uses: actions/upload-artifact@v3
         if: always()

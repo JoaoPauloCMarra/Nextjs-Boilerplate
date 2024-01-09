@@ -8,7 +8,8 @@
 		"build": "next build",
 		"start": "next start",
 		"test:unit": "vitest",
-		"test:e2e": "playwright test --ui",
+		"test:e2e": "playwright test",
+		"test:e2e:ui": "playwright test --ui",
 		"lint": "next lint --fix --max-warnings 0",
 		"format": "prettier . --write",
 		"prepare": "husky install",
@@ -23,9 +24,9 @@
 	],
 	"engines": {
 		"node": ">=18.17.0",
-		"yarn": ">=1.2.19"
+		"bun": ">=1.0.21"
 	},
-	"packageManager": "yarn@1.2.19",
+	"packageManager": "bun@1.0.21",
 	"dependencies": {
 		"@hookform/resolvers": "^3.3.3",
 		"@radix-ui/react-dialog": "^1.0.5",

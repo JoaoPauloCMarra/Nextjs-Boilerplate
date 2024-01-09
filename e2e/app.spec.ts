@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { APP_NAME } from '@/lib/constants';
 import { USERNAME_FORM_TESTIDS } from '@/features/username-form/test-ids';
+import { getInputValueString } from './e2e-utils';
 
 test('has title', async ({ page }) => {
 	await page.goto('/');
@@ -24,11 +25,9 @@ test('demo form works', async ({ page }) => {
 	const buttonSubmit = page.getByTestId(USERNAME_FORM_TESTIDS.buttonSubmit);
 	expect(buttonSubmit).toBeTruthy();
 
-	await inputName.pressSequentially('jota');
-
-	expect(inputName).toHaveValue('jota');
+	await inputName.fill('jota');
+	expect(await getInputValueString(inputName)).toBe('jota');
 
 	await buttonClear.click();
-
-	expect(inputName).toBeEmpty();
+	expect(await getInputValueString(inputName)).toBe('');
 });

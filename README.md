@@ -2,7 +2,7 @@
 
 # Nextjs Boilerplate
 
-- Yarn
+- Bun/Yarn/NPM/PNPM
 
 - NextJs 14
 - Tailwindcss + shadcn
@@ -24,15 +24,15 @@ src/ work in progress to add more sandbox stuff to validate the Webvitals
 
 ## Scripts
 
-`yarn dev` to run dev mode
-`yarn build` to build
-`yarn start` to run the build as production
+`bun dev` to run dev mode
+`bun build` to build
+`bun start` to run the build as production
 
-`yarn test:unit` unit test
-`yarn test:e2e` end to end test
+`bun test:unit` unit test
+`bun test:e2e` end to end test
 
-`yarn lint` to run eslint on the codebase
-`yarn format` to run prettier on the codebase
+`bun lint` to run eslint on the codebase
+`bun format` to run prettier on the codebase
 
 ## Web Vitals / Lighthouse
 
