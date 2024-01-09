@@ -22,10 +22,6 @@
 		"opera 51",
 		"safari 12"
 	],
-	"engines": {
-		"node": ">=18.17.0",
-		"bun": ">=1.0.21"
-	},
 	"packageManager": "bun@1.0.21",
 	"dependencies": {
 		"@hookform/resolvers": "^3.3.3",
@@ -45,7 +41,7 @@
 		"react": "^18",
 		"react-dom": "^18",
 		"react-hook-form": "^7.49.2",
-		"sharp": "^0.33.1",
+		"sharp": "0.33.0-alpha.6",
 		"tailwind-merge": "^2.2.0",
 		"tailwindcss": "^3.4.0",
 		"tailwindcss-animate": "^1.0.7",
