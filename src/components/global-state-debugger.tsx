@@ -29,7 +29,7 @@ export default function GlobalStateDebugger() {
 	return (
 		<>
 			{!visible && (
-				<div className="fixed bottom-2 right-2 z-10 rounded-full bg-slate-700 p-2">
+				<div className="fixed bottom-2 right-2 z-10 rounded-full bg-slate-700 p-2 opacity-90">
 					<ArrowUp className="size-4" onClick={() => setVisible(true)} />
 				</div>
 			)}

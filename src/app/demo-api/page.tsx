@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import { baseMetadata } from '@/lib/constants';
-import JSONViewer from '@/components/json-viewer';
 
 export const metadata: Metadata = {
 	...baseMetadata,
@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 };
 
 const DATA_URL = 'https://jsonplaceholder.typicode.com/users/1';
+const JSONViewer = dynamic(() => import('@/components/json-viewer'));
 
 export default async function DemoExternalAPI() {
 	let loading = true;
@@ -24,7 +25,6 @@ export default async function DemoExternalAPI() {
 			data = await response.json();
 		}
 	} catch (error) {
-		console.log(error);
 		errorMessage = String(error);
 	}
 
