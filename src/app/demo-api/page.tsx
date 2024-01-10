@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { baseMetadata } from '@/lib/constants';
-import { waitSeconds } from '@/lib/utils';
 import JSONViewer from '@/components/json-viewer';
 
 export const metadata: Metadata = {
@@ -17,7 +16,6 @@ export default async function DemoExternalAPI() {
 	let errorMessage: string = '';
 
 	const response = await fetch(DATA_URL);
-	await waitSeconds(2);
 
 	try {
 		if (!response.ok) {
