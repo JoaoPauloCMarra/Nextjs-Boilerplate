@@ -40,7 +40,7 @@
 	/* .dark {	} */
 
 	* {
-		@apply border-border;
+		@apply min-w-0 border-border;
 	}
 	body {
 		font-feature-settings: /* fix for Chrome */

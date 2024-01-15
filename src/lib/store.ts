@@ -23,3 +23,25 @@ export const getSearchTermAtom = atom((get) => get(searchTermAtom));
 export const setSearchTermAtom = atom(null, (_, set, term: string) => {
 	set(searchTermAtom, term);
 });
+
+/**
+ * Todo Board Storage
+ */
+const todoBoardAtom = atom<{
+	columns: BoardColumn[];
+}>({
+	columns: []
+});
+
+export const getTodoColumns = atom((get) => get(todoBoardAtom).columns);
+
+export const setTodoColumns = atom(null, (get, set, update: BoardColumn) => {
+	const current = get(todoBoardAtom);
+
+	set(todoBoardAtom, {
+		...current,
+		...{
+			columns: [...current.columns, update]
+		}
+	});
+});

@@ -36,7 +36,7 @@ export default function MainNav({ className, ...props }: Props) {
 	return (
 		<nav
 			className={cn(
-				'flex w-full flex-col items-center justify-center px-6 md:flex-row md:space-x-4 lg:space-x-6',
+				'flex flex-col items-center justify-center px-6 md:flex-row md:space-x-4 lg:space-x-6',
 				className
 			)}
 			{...props}

@@ -10,7 +10,7 @@ import { getUserAtom } from '@/lib/store';
 import type { UsernameFormSubmit } from '@/app/actions/username';
 import { useToast } from '@/components/primitives/use-toast';
 import type { UsernameFormValues } from './utils';
-import { formSchema } from './utils';
+import { usernameFormSchema } from './utils';
 
 export type UseUsernameFormProps = {
 	action: UsernameFormSubmit;
@@ -23,10 +23,9 @@ export default function useUsernameForm(props: UseUsernameFormProps) {
 	const setUser = useSetAtom(setUserAtom);
 	const userInfo = useAtomValue(getUserAtom);
 	const form = useForm<UsernameFormValues>({
-		resolver: zodResolver(formSchema),
+		resolver: zodResolver(usernameFormSchema),
 		defaultValues: props.defaultValues || userInfo
 	});
-
 	const { toast } = useToast();
 
 	const onSubmit = async (data: UsernameFormValues) => {
