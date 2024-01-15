@@ -60,7 +60,7 @@ export default function useUsernameForm(props: UseUsernameFormProps) {
 	};
 
 	const onCancel = () => {
-		abortControllerRef.current?.abort();
+		abortControllerRef.current.abort();
 	};
 
 	return {

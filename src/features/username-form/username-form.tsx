@@ -56,7 +56,7 @@ export default function UsernameForm(props: UseUsernameFormProps) {
 						className="rounded-md bg-destructive px-4 py-2 text-sm text-destructive-foreground"
 						role="alert"
 					>
-						<span>{errors.root?.message}</span>
+						<span>{errors.root.message}</span>
 					</div>
 				)}
 				<div className="flex w-full justify-between">

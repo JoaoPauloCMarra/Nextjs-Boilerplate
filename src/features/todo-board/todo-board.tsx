@@ -21,7 +21,7 @@ export default function TodoBoard(props: Props) {
 			<div className="pb-8">
 				<h1 className="text-2xl font-bold">Demo Todo Board</h1>
 			</div>
-			<div className="grid auto-cols-max grid-flow-col gap-2 overflow-auto">
+			<div className="scrollbar-hide grid auto-cols-max grid-flow-col gap-2 overflow-auto">
 				{columns.map((column) => (
 					<motion.div
 						key={`${column.index}-${column.name}`}
@@ -81,7 +81,7 @@ function TodoColumnForm(props: TodoColumnFormProps) {
 						className="mt-1 rounded-md bg-destructive px-4 py-2 text-sm text-destructive-foreground"
 						role="alert"
 					>
-						<span>{errors.root?.message}</span>
+						<span>{errors.root.message}</span>
 					</div>
 				)}
 			</form>
