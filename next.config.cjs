@@ -7,8 +7,11 @@ const nextConfig = {
 	compress: true,
 
 	compiler: {
-		reactRemoveProperties: true
+		reactRemoveProperties: true,
+		removeConsole: true
 	},
+
+	outputFileTracing: false,
 
 	experimental: {
 		typedRoutes: true,

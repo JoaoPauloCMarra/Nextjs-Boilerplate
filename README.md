@@ -25,7 +25,7 @@ src/ work in progress to add more sandbox stuff to validate the Webvitals
 ## Scripts
 
 `bun dev` to run dev mode
-`bun build` to build
+`bun run build` to build
 `bun start` to run the build as production
 
 `bun test:unit` unit test

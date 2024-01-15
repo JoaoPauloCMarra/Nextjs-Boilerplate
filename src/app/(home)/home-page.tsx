@@ -30,7 +30,7 @@ export default function HomePage() {
 	const { scrollYProgress } = useScroll();
 
 	return (
-		<div className="container flex h-full w-full flex-1 flex-col items-center overflow-x-hidden py-4">
+		<div className="container flex size-full flex-1 flex-col items-center overflow-x-hidden py-4">
 			<div className="grid w-full flex-1 grid-cols-1 gap-4 p-4 md:grid-cols-2 md:gap-10 md:p-10">
 				<motion.div
 					variants={blocksAnimationStates}
@@ -39,13 +39,13 @@ export default function HomePage() {
 					className="flex aspect-square items-center justify-center gap-4 overflow-hidden rounded-lg bg-slate-800 md:gap-10"
 				>
 					<motion.div
-						className="h-20 w-20 rounded-lg bg-stone-100"
+						className="size-20 rounded-lg bg-stone-100"
 						initial={{ opacity: 0, y: 100 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
 					/>
 					<motion.div
-						className="h-20 w-20 rounded-full bg-stone-100"
+						className="size-20 rounded-full bg-stone-100"
 						initial={{ opacity: 0, y: -100 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 1, ease: 'easeOut', delay: 0.4 }}
@@ -58,7 +58,7 @@ export default function HomePage() {
 					className="flex aspect-square items-center justify-center gap-4 rounded-lg bg-slate-800 md:gap-10"
 				>
 					<motion.div
-						className="h-1/3 w-1/3 bg-rose-400 shadow-md"
+						className="size-1/3 bg-rose-400 shadow-md"
 						animate={{
 							scale: [1, 2, 2, 1],
 							rotate: [0, 90, 90, 0],
@@ -90,7 +90,7 @@ export default function HomePage() {
 				>
 					<div className="aspect-square w-40 rounded-xl bg-gray-50/20">
 						<motion.div
-							className="h-full w-full origin-bottom overflow-hidden rounded-xl bg-gray-400"
+							className="size-full origin-bottom overflow-hidden rounded-xl bg-gray-400"
 							style={{ scaleY: scrollYProgress }}
 						/>
 					</div>
@@ -103,7 +103,7 @@ export default function HomePage() {
 					ref={dragConstrainRef}
 				>
 					<motion.div
-						className="flex h-1/3 w-1/3 cursor-grab items-center justify-center rounded-3xl bg-orange-500 font-bold text-black"
+						className="flex size-1/3 cursor-grab items-center justify-center rounded-3xl bg-orange-500 font-bold text-black"
 						drag
 						dragConstraints={dragConstrainRef}
 						dragTransition={{ bounceDamping: 10, bounceStiffness: 600 }}
