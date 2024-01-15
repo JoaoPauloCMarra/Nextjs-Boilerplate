@@ -26,32 +26,38 @@ export default function useTodoBoardColumn(props: TodoColumnFormProps) {
 		}
 	});
 
+	const focusOnInpit = (reset = false) => {
+		setTimeout(() => {
+			if (reset) form.reset();
+			refs.name.current?.focus();
+		}, 100);
+	};
+
 	const formAction = async (formData: FormData) => {
 		startTransition(async () => {
 			try {
 				const data = Object.fromEntries(formData.entries()) as unknown as TodoBoardColumnFormValues;
-
-				if (data.name === 'error') {
-					throw 'test error';
-				}
-
 				const nextColumn = {
 					index: props.totalColumns + 1,
 					name: data.name
 				};
-				await props.action({
+				const response = await props.action({
 					data: nextColumn
 				});
+				if (response.status !== 200) {
+					form.setError('name', {
+						message: response.message
+					});
+					focusOnInpit();
+					return;
+				}
 				addColumn(nextColumn);
-				setTimeout(() => {
-					form.reset();
-					refs.name.current?.focus();
-				}, 100);
+				focusOnInpit(true);
 			} catch (error) {
-				console.log(error);
-				form.setError('name', {
+				form.setError('root', {
 					message: String(error)
 				});
+				focusOnInpit();
 			}
 		});
 	};
