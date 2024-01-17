@@ -14,7 +14,7 @@
 		"format": "prettier . --write",
 		"prepare": "husky install",
 		"shadcn-add": "npx shadcn-ui@latest add",
-		"check-updates": "bunx npm-check-updates -i"
+		"check-updates": "bunx npm-check-updates -i --color"
 	},
 	"browserslist": [
 		"chrome 64",
@@ -36,8 +36,8 @@
 		"clsx": "^2.1.0",
 		"date-fns": "^3.2.0",
 		"framer-motion": "^10.18.0",
-		"jotai": "^2.6.1",
-		"lucide-react": "^0.309.0",
+		"jotai": "^2.6.2",
+		"lucide-react": "^0.311.0",
 		"next": "canary",
 		"react": "^18",
 		"react-dom": "^18",
@@ -48,13 +48,13 @@
 		"zod": "^3.22.4"
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.40.1",
+		"@playwright/test": "^1.41.0",
 		"@swc-jotai/react-refresh": "^0.1.0",
 		"@testing-library/react": "^14.1.2",
 		"@types/node": "^20",
 		"@types/react": "^18",
 		"@types/react-dom": "^18",
-		"@typescript-eslint/eslint-plugin": "^6.18.1",
+		"@typescript-eslint/eslint-plugin": "^6.19.0",
 		"@vitejs/plugin-react": "^4.2.1",
 		"@vitest/ui": "^1.2.0",
 		"autoprefixer": "^10.4.16",
@@ -73,7 +73,7 @@
 		"husky": "^8.0.3",
 		"jsdom": "^23.2.0",
 		"postcss": "^8.4.33",
-		"prettier": "^3.2.2",
+		"prettier": "^3.2.4",
 		"prettier-plugin-tailwindcss": "^0.5.11",
 		"typescript": "^5",
 		"vitest": "^1.2.0"

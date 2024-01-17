@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useAtomValue } from 'jotai';
 import { ArrowUp, X } from 'lucide-react';
-import { getSearchTermAtom, getUserAtom } from '@/lib/store';
+import { getSearchTermAtom, getTodoColumns, getUserAtom } from '@/lib/store';
 import { cn } from '@/lib/utils';
 import type { Variants } from 'framer-motion';
 
@@ -24,6 +24,7 @@ const windowVariant: Variants = {
 export default function GlobalStateDebugger() {
 	const userInfo = useAtomValue(getUserAtom);
 	const searchTerm = useAtomValue(getSearchTermAtom);
+	const boardColumns = useAtomValue(getTodoColumns);
 	const [visible, setVisible] = useState(true);
 
 	return (
@@ -50,6 +51,11 @@ export default function GlobalStateDebugger() {
 						<p className="text-base font-bold">Global State:</p>
 						<X className="size-4" onClick={() => setVisible(false)} />
 					</div>
+					<pre className="mt-2 w-[340px] max-w-full rounded-md bg-slate-950 p-4 text-xs">
+						<code className="text-white">
+							<b>number of board columns:</b> {boardColumns.length || <i>0</i>}
+						</code>
+					</pre>
 					<pre className="mt-2 w-[340px] max-w-full rounded-md bg-slate-950 p-4 text-xs">
 						<code className="text-white">
 							<b>searchTerm:</b> {searchTerm || <i>empty</i>}

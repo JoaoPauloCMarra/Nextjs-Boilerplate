@@ -11,7 +11,6 @@ import {
 	DialogTitle,
 	DialogTrigger
 } from '@/components/primitives/dialog';
-import useInformationModal from './use-information-modal';
 import type { Variants } from 'framer-motion';
 
 const svgIconVariants: Variants = {
@@ -28,8 +27,6 @@ const svgIconVariants: Variants = {
 };
 
 export default function InformationModal() {
-	const {} = useInformationModal();
-
 	return (
 		<div className="flex w-full flex-col justify-center">
 			<Dialog>

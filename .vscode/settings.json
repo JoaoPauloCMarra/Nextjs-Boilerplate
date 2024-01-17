@@ -1,12 +1,14 @@
 {
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
-	"editor.formatOnSave": true,
+  "editor.formatOnSave": true,
 	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": "explicit"
+		"source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
 	},
-	"terminal.integrated.scrollback": 10000,
+	"prettier.enable": true,
+	"eslint.format.enable": true,
 	"eslint.validate": [
-    "javascript",
+		"javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact"
@@ -15,15 +17,19 @@
 		["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
 		["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
 	],
+	"tailwindCSS.classAttributes": [
+		"class",
+    "className",
+    "classNames",
+  ],
 	"typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
 	"typescript.surveys.enabled": false,
+	"terminal.integrated.scrollback": 10000,
 	"explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "*.ts": "$(capture).test.ts, $(capture).test.tsx",
     "*.tsx": "$(capture).test.ts, $(capture).test.tsx"
-	},
-	"[ignore]": {
-		"editor.defaultFormatter": "foxundermoon.shell-format"
 	},
 	"[dotenv]": {
 		"editor.defaultFormatter": "foxundermoon.shell-format"
@@ -31,4 +37,20 @@
 	"[shellscript]": {
 		"editor.defaultFormatter": "foxundermoon.shell-format"
 	},
+	"[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+	"files.associations": {
+    "*.ignore": "plaintext",
+    "*.txt": "plaintext"
+  },
 }

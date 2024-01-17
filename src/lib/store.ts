@@ -35,13 +35,24 @@ const todoBoardAtom = atom<{
 
 export const getTodoColumns = atom((get) => get(todoBoardAtom).columns);
 
-export const setTodoColumns = atom(null, (get, set, update: BoardColumn) => {
+export const addTodoColumns = atom(null, (get, set, update: BoardColumn) => {
 	const current = get(todoBoardAtom);
 
 	set(todoBoardAtom, {
 		...current,
 		...{
 			columns: [...current.columns, update]
+		}
+	});
+});
+
+export const removeTodoColumns = atom(null, (get, set, index: number) => {
+	const current = get(todoBoardAtom);
+
+	set(todoBoardAtom, {
+		...current,
+		...{
+			columns: current.columns.filter((column) => column.index !== index)
 		}
 	});
 });
