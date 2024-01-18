@@ -17,7 +17,7 @@ export default async function DemoExternalAPI() {
 	let errorMessage: string = '';
 
 	const response = await fetch(DATA_URL);
-	waitSeconds(5);
+	await waitSeconds(2);
 
 	try {
 		if (!response.ok) {
@@ -31,7 +31,7 @@ export default async function DemoExternalAPI() {
 
 	return (
 		<div className="container flex w-full flex-1 flex-col items-center gap-4 py-4">
-			<h2 className="text-2xl">Demo api response inside a RSC</h2>
+			<h2 className="text-2xl">Demo api response inside a RSC with 2s wait</h2>
 			<p className="italic opacity-70">data from: {DATA_URL}</p>
 			<div className="w-full max-w-sm overflow-x-auto rounded-xl bg-slate-700 p-1 md:p-4">
 				{!errorMessage && data && <JSONViewer data={data} />}

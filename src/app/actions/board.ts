@@ -6,7 +6,7 @@ export type BoardColumnSubmitParams = {
 
 export async function boardColumnSubmit({ data }: BoardColumnSubmitParams) {
 	if (data.name.toLowerCase() === 'invalid') {
-		return { status: 401, message: `Column name ${data.name} not allowed.` };
+		return { status: 401, message: `Column name ${data.name} is not allowed.` };
 	}
 
 	if (data.name.toLowerCase() === 'error') {

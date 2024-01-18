@@ -47,14 +47,14 @@ export default function TodoBoard(props: Props) {
 	};
 
 	useEffect(() => {
-		if (!boardContainerRef.current) return;
+		if (!boardContainerRef.current || !columns.length) return;
 		setTimeout(() => {
 			boardContainerRef.current?.lastElementChild?.scrollIntoView({
 				behavior: 'smooth',
 				inline: 'nearest'
 			});
 		}, 100);
-	}, [isTodoColumnFormVisible]);
+	}, [isTodoColumnFormVisible, columns.length]);
 
 	return (
 		<div className="flex w-full flex-col overflow-hidden">
@@ -76,7 +76,7 @@ export default function TodoBoard(props: Props) {
 						className="w-[320px] rounded-md bg-slate-900 p-4"
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
-						transition={{ duration: 0.25, ease: 'easeOut' }}
+						transition={{ duration: 0.15, ease: 'easeIn' }}
 					>
 						<div className="flex w-full justify-between pb-4">
 							<p
@@ -112,7 +112,7 @@ export default function TodoBoard(props: Props) {
 					<motion.div
 						animate={isTodoColumnFormVisible && { opacity: 1 }}
 						initial={{ opacity: 0 }}
-						transition={{ duration: 0.25 }}
+						transition={{ duration: 0.15, ease: 'easeIn' }}
 					>
 						<TodoColumnForm
 							totalColumns={columns.length}

@@ -6,7 +6,7 @@ export type UsernameFormSubmitParams = {
 
 export async function usernameFormSubmit({ data }: UsernameFormSubmitParams) {
 	if (data.username === 'user') {
-		return { status: 401, message: `Username ${data.username} not allowed.` };
+		return { status: 401, message: `Username ${data.username} is not allowed.` };
 	}
 
 	if (data.username === 'error') {

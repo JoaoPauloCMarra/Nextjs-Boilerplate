@@ -21,7 +21,7 @@ describe('usernameFormSubmit', () => {
 		});
 
 		expect(JSON.stringify(result)).toBe(
-			JSON.stringify({ status: 401, message: 'Username user not allowed.' })
+			JSON.stringify({ status: 401, message: 'Username user is not allowed.' })
 		);
 	});
 	test('returns success for input "jota"', async () => {
