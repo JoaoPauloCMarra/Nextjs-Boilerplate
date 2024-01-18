@@ -33,9 +33,9 @@ const todoBoardAtom = atom<{
 	columns: []
 });
 
-export const getTodoColumns = atom((get) => get(todoBoardAtom).columns);
+export const getTodoColumnsAtom = atom((get) => get(todoBoardAtom).columns);
 
-export const addTodoColumns = atom(null, (get, set, update: BoardColumn) => {
+export const addTodoColumnsAtom = atom(null, (get, set, update: BoardColumn) => {
 	const current = get(todoBoardAtom);
 
 	set(todoBoardAtom, {
@@ -46,7 +46,7 @@ export const addTodoColumns = atom(null, (get, set, update: BoardColumn) => {
 	});
 });
 
-export const removeTodoColumns = atom(null, (get, set, index: number) => {
+export const deleteTodoColumnAtom = atom(null, (get, set, index: number) => {
 	const current = get(todoBoardAtom);
 
 	set(todoBoardAtom, {

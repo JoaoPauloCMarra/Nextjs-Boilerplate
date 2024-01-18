@@ -2,11 +2,19 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { useAtomValue } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import dynamic from 'next/dynamic';
-import { getTodoColumns } from '@/lib/store';
+import { deleteTodoColumnAtom, getTodoColumnsAtom } from '@/lib/store';
 import { cn } from '@/lib/utils';
 import type { BoardColumnSubmit } from '@/app/actions/board';
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger
+} from '@/components/primitives/dropdown-menu';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/primitives/form';
 import { Input } from '@/components/primitives/input';
 import type { TodoColumnFormProps } from './use-todo-board';
@@ -16,13 +24,15 @@ type Props = {
 	createColumnAction: BoardColumnSubmit;
 };
 
+const OptionsIcon = dynamic(() => import('lucide-react').then((module) => module.MoreVertical));
 const PlusIcon = dynamic(() => import('lucide-react').then((module) => module.PlusCircleIcon));
 const CloseIcon = dynamic(() => import('lucide-react').then((module) => module.MinusCircleIcon));
 
 export default function TodoBoard(props: Props) {
-	const columns = useAtomValue(getTodoColumns);
-	const [isTodoColumnFormVisible, setTodoColumnFormVisible] = useState(false);
+	const columns = useAtomValue(getTodoColumnsAtom);
+	const deleteTodo = useSetAtom(deleteTodoColumnAtom);
 	const boardContainerRef = useRef<HTMLDivElement>(null);
+	const [isTodoColumnFormVisible, setTodoColumnFormVisible] = useState(false);
 
 	const onColumnFormShow = () => {
 		setTodoColumnFormVisible(true);
@@ -30,6 +40,10 @@ export default function TodoBoard(props: Props) {
 
 	const onColumnFormHide = () => {
 		setTodoColumnFormVisible(false);
+	};
+
+	const onColumnDelete = (index: number) => {
+		deleteTodo(index);
 	};
 
 	useEffect(() => {
@@ -53,7 +67,7 @@ export default function TodoBoard(props: Props) {
 				)}
 			</div>
 			<div
-				className="scrollbar-hide grid auto-cols-max grid-flow-col gap-2 overflow-auto"
+				className="scrollbar-hide grid auto-cols-max grid-flow-col gap-2 overflow-x-auto overflow-y-visible"
 				ref={boardContainerRef}
 			>
 				{columns.map((column) => (
@@ -64,10 +78,29 @@ export default function TodoBoard(props: Props) {
 						animate={{ opacity: 1 }}
 						transition={{ duration: 0.25, ease: 'easeOut' }}
 					>
-						<div className="mb-4">
-							<p className="text-xl">{column.name}</p>
+						<div className="flex w-full justify-between pb-4">
+							<p
+								className="cursor-default select-none truncate text-xl font-bold"
+								title={column.name}
+							>
+								{column.name}
+							</p>
+							<DropdownMenu>
+								<DropdownMenuTrigger>
+									<OptionsIcon className="size-4" />
+								</DropdownMenuTrigger>
+								<DropdownMenuContent>
+									<DropdownMenuLabel>Options</DropdownMenuLabel>
+									<DropdownMenuSeparator />
+									<DropdownMenuItem onClick={() => onColumnDelete(column.index)}>
+										Delete Column
+									</DropdownMenuItem>
+								</DropdownMenuContent>
+							</DropdownMenu>
 						</div>
-						<span className="text-sm">WIP: items</span>
+						<div className="w-full">
+							<TodoItemsForm />
+						</div>
 					</motion.div>
 				))}
 				<div
@@ -76,14 +109,18 @@ export default function TodoBoard(props: Props) {
 						isTodoColumnFormVisible && 'visible w-[320px] p-4'
 					)}
 				>
-					<motion.div animate={isTodoColumnFormVisible && { opacity: 1 }} initial={{ opacity: 0 }}>
+					<motion.div
+						animate={isTodoColumnFormVisible && { opacity: 1 }}
+						initial={{ opacity: 0 }}
+						transition={{ duration: 0.25 }}
+					>
 						<TodoColumnForm
 							totalColumns={columns.length}
 							action={props.createColumnAction}
 							onSubmit={() => setTodoColumnFormVisible(false)}
 						/>
 					</motion.div>
-					<div className="absolute left-0 top-0 text-white">
+					<div className="absolute left-1 top-1 text-white">
 						<CloseIcon className="size-6" onClick={onColumnFormHide} />
 					</div>
 				</div>
@@ -100,7 +137,7 @@ function TodoColumnForm(props: TodoColumnFormProps) {
 
 	return (
 		<Form {...form}>
-			<form action={formAction} onSubmit={props.onSubmit}>
+			<form action={formAction} onSubmit={props.onSubmit} className="p-4">
 				<FormField
 					control={form.control}
 					name="name"
@@ -135,4 +172,8 @@ function TodoColumnForm(props: TodoColumnFormProps) {
 			</form>
 		</Form>
 	);
+}
+
+function TodoItemsForm() {
+	return <p>Form to add items WIP</p>;
 }

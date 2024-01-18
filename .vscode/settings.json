@@ -25,6 +25,10 @@
 	"typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
 	"typescript.surveys.enabled": false,
+  "typescript.preferences.autoImportFileExcludePatterns": [
+    "**/node_modules/@types/node",
+    "**/node_modules/@radix-ui",
+  ],
 	"terminal.integrated.scrollback": 10000,
 	"explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {

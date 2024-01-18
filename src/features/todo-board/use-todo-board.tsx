@@ -3,7 +3,7 @@ import { useRef, useTransition } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSetAtom } from 'jotai';
 import { useForm } from 'react-hook-form';
-import { addTodoColumns } from '@/lib/store';
+import { addTodoColumnsAtom } from '@/lib/store';
 import type { BoardColumnSubmit } from '@/app/actions/board';
 import type { TodoBoardColumnFormValues } from './utils';
 import { todoBoardColumnFormSchema } from './utils';
@@ -16,7 +16,7 @@ export type TodoColumnFormProps = {
 
 export default function useTodoBoardColumn(props: TodoColumnFormProps) {
 	const [isSubimitting, startTransition] = useTransition();
-	const addColumn = useSetAtom(addTodoColumns);
+	const addColumn = useSetAtom(addTodoColumnsAtom);
 	const refs = {
 		name: useRef<HTMLInputElement>(null)
 	};

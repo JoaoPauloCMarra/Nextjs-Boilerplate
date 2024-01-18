@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useAtomValue } from 'jotai';
 import { ArrowUp, X } from 'lucide-react';
-import { getSearchTermAtom, getTodoColumns, getUserAtom } from '@/lib/store';
+import { getSearchTermAtom, getTodoColumnsAtom, getUserAtom } from '@/lib/store';
 import { cn } from '@/lib/utils';
 import type { Variants } from 'framer-motion';
 
@@ -24,7 +24,7 @@ const windowVariant: Variants = {
 export default function GlobalStateDebugger() {
 	const userInfo = useAtomValue(getUserAtom);
 	const searchTerm = useAtomValue(getSearchTermAtom);
-	const boardColumns = useAtomValue(getTodoColumns);
+	const boardColumns = useAtomValue(getTodoColumnsAtom);
 	const [visible, setVisible] = useState(true);
 
 	return (
