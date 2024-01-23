@@ -1,10 +1,7 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { useAtomValue, useSetAtom } from 'jotai';
 import dynamic from 'next/dynamic';
-import { deleteTodoColumnAtom, getTodoColumnsAtom } from '@/lib/store';
 import { cn } from '@/lib/utils';
 import type { BoardColumnSubmit } from '@/app/actions/board';
 import {
@@ -17,8 +14,10 @@ import {
 } from '@/components/primitives/dropdown-menu';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/primitives/form';
 import { Input } from '@/components/primitives/input';
-import type { TodoColumnFormProps } from './use-todo-board';
-import useTodoBoardColumn from './use-todo-board';
+import useTodoBoard from './use-todo-board';
+import type { TodoColumnFormProps } from './use-todo-board-column';
+import useTodoBoardColumn from './use-todo-board-column';
+import { useTodoBoardItems } from './use-todo-board-items';
 
 type Props = {
 	createColumnAction: BoardColumnSubmit;
@@ -29,32 +28,14 @@ const PlusIcon = dynamic(() => import('lucide-react').then((module) => module.Pl
 const CloseIcon = dynamic(() => import('lucide-react').then((module) => module.MinusCircleIcon));
 
 export default function TodoBoard(props: Props) {
-	const columns = useAtomValue(getTodoColumnsAtom);
-	const deleteTodo = useSetAtom(deleteTodoColumnAtom);
-	const boardContainerRef = useRef<HTMLDivElement>(null);
-	const [isTodoColumnFormVisible, setTodoColumnFormVisible] = useState(false);
-
-	const onColumnFormShow = () => {
-		setTodoColumnFormVisible(true);
-	};
-
-	const onColumnFormHide = () => {
-		setTodoColumnFormVisible(false);
-	};
-
-	const onColumnDelete = (index: number) => {
-		deleteTodo(index);
-	};
-
-	useEffect(() => {
-		if (!boardContainerRef.current || !columns.length) return;
-		setTimeout(() => {
-			boardContainerRef.current?.lastElementChild?.scrollIntoView({
-				behavior: 'smooth',
-				inline: 'nearest'
-			});
-		}, 100);
-	}, [isTodoColumnFormVisible, columns.length]);
+	const {
+		columns,
+		isTodoColumnFormVisible,
+		boardContainerRef,
+		onColumnDelete,
+		onColumnFormHide,
+		onColumnFormShow
+	} = useTodoBoard();
 
 	return (
 		<div className="flex w-full flex-col overflow-hidden">
@@ -74,9 +55,9 @@ export default function TodoBoard(props: Props) {
 					<motion.div
 						key={`${column.index}-${column.name}`}
 						className="w-[320px] rounded-md bg-slate-900 p-4"
-						initial={{ opacity: 0 }}
+						initial={{ opacity: 0.5 }}
 						animate={{ opacity: 1 }}
-						transition={{ duration: 0.15, ease: 'easeIn' }}
+						transition={{ duration: 0.15, ease: 'linear' }}
 					>
 						<div className="flex w-full justify-between pb-4">
 							<p
@@ -111,13 +92,13 @@ export default function TodoBoard(props: Props) {
 				>
 					<motion.div
 						animate={isTodoColumnFormVisible && { opacity: 1 }}
-						initial={{ opacity: 0 }}
-						transition={{ duration: 0.15, ease: 'easeIn' }}
+						initial={{ opacity: 0.5 }}
+						transition={{ duration: 0.15, ease: 'linear' }}
 					>
 						<TodoColumnForm
 							totalColumns={columns.length}
 							action={props.createColumnAction}
-							onSubmit={() => setTodoColumnFormVisible(false)}
+							onSubmit={onColumnFormHide}
 						/>
 					</motion.div>
 					<div className="absolute left-1 top-1 text-white">
@@ -175,5 +156,6 @@ function TodoColumnForm(props: TodoColumnFormProps) {
 }
 
 function TodoItemsForm() {
+	const {} = useTodoBoardItems();
 	return <p>Form to add items WIP</p>;
 }

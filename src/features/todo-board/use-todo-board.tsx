@@ -1,66 +1,38 @@
-import type { FormEventHandler } from 'react';
-import { useRef, useTransition } from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useSetAtom } from 'jotai';
-import { useForm } from 'react-hook-form';
-import { addTodoColumnsAtom } from '@/lib/store';
-import type { BoardColumnSubmit } from '@/app/actions/board';
-import type { TodoBoardColumnFormValues } from './utils';
-import { todoBoardColumnFormSchema } from './utils';
+import { useEffect, useRef, useState } from 'react';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { deleteTodoColumnAtom, getTodoColumnsAtom } from '@/lib/store';
+import { scrollToElement } from '@/lib/utils';
 
-export type TodoColumnFormProps = {
-	totalColumns: number;
-	action: BoardColumnSubmit;
-	onSubmit?: FormEventHandler;
-};
+export default function useTodoBoard() {
+	const columns = useAtomValue(getTodoColumnsAtom);
+	const deleteTodo = useSetAtom(deleteTodoColumnAtom);
+	const boardContainerRef = useRef<HTMLDivElement>(null);
+	const [isTodoColumnFormVisible, setTodoColumnFormVisible] = useState(false);
 
-export default function useTodoBoardColumn(props: TodoColumnFormProps) {
-	const [isSubimitting, startTransition] = useTransition();
-	const addColumn = useSetAtom(addTodoColumnsAtom);
-	const refs = {
-		name: useRef<HTMLInputElement>(null)
+	const onColumnFormShow = () => {
+		setTodoColumnFormVisible(true);
 	};
-	const form = useForm<TodoBoardColumnFormValues>({
-		resolver: zodResolver(todoBoardColumnFormSchema),
-		defaultValues: {
-			index: 0,
-			name: ''
-		}
-	});
 
-	const formAction = async (formData: FormData) => {
-		startTransition(async () => {
-			try {
-				const data = Object.fromEntries(formData.entries()) as unknown as TodoBoardColumnFormValues;
-				const nextColumn = {
-					index: props.totalColumns + 1,
-					name: data.name
-				};
-				const response = await props.action({
-					data: nextColumn
-				});
-				if (response.status !== 200) {
-					form.setError('name', {
-						message: response.message
-					});
-					return;
-				}
-				addColumn(nextColumn);
-			} catch (error) {
-				form.setError('root', {
-					message: String(error)
-				});
-			} finally {
-				form.reset();
-			}
-		});
+	const onColumnFormHide = () => {
+		setTodoColumnFormVisible(false);
 	};
+
+	const onColumnDelete = (index: number) => {
+		deleteTodo(index);
+	};
+
+	useEffect(() => {
+		if (!boardContainerRef.current?.lastElementChild || !columns.length) return;
+		scrollToElement(boardContainerRef.current.lastElementChild, 100);
+	}, [isTodoColumnFormVisible, columns.length]);
 
 	return {
-		form,
-		isSubimitting,
-		refs,
+		columns,
+		isTodoColumnFormVisible,
+		boardContainerRef,
 
-		formAction
+		onColumnFormShow,
+		onColumnFormHide,
+		onColumnDelete
 	};
 }
