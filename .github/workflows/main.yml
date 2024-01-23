@@ -39,7 +39,7 @@ jobs:
         run: bun run build
 
       - name: Running Unit Tests
-        run: bun test:unit run
+        run: bun test:unit
 
       - name: Install Playwright Browsers
         run: bun playwright install --with-deps

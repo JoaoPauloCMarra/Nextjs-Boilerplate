@@ -31,3 +31,27 @@ test('demo form works', async ({ page }) => {
 	await buttonClear.click();
 	expect(await getInputValueString(inputName)).toBe('');
 });
+
+test('demo modal works', async ({ page }) => {
+	await page.goto('/demo-modal');
+
+	await page.waitForSelector('main[style="opacity: 1;"]');
+
+	await expect(page).toHaveTitle(`Demo Modal - ${APP_NAME}`);
+});
+
+test('demo api works', async ({ page }) => {
+	await page.goto('/demo-api');
+
+	await page.waitForSelector('main[style="opacity: 1;"]');
+
+	await expect(page).toHaveTitle(`Demo API - ${APP_NAME}`);
+});
+
+test('demo board works', async ({ page }) => {
+	await page.goto('/demo-board');
+
+	await page.waitForSelector('main[style="opacity: 1;"]');
+
+	await expect(page).toHaveTitle(`Demo Board - ${APP_NAME}`);
+});

@@ -5,7 +5,7 @@ import { waitSeconds } from '@/lib/utils';
 
 export const metadata: Metadata = {
 	...baseMetadata,
-	title: `Demo Text - ${baseMetadata.title}`,
+	title: `Demo API - ${baseMetadata.title}`,
 	description: ''
 };
 
