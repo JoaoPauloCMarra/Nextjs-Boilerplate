@@ -39,6 +39,3 @@ bun-error.log*
 *.tsbuildinfo
 next-env.d.ts
 /test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/

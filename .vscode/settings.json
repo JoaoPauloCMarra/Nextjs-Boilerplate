@@ -57,4 +57,7 @@
     "*.ignore": "plaintext",
     "*.txt": "plaintext"
   },
+  "[ignore]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
 }

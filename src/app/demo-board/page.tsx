@@ -23,7 +23,7 @@ const TodoBoard = dynamic(
 
 export default async function DemoModal() {
 	return (
-		<div className="container flex flex-1 flex-col items-center py-4 md:gap-4">
+		<div className="flex flex-1 flex-col items-center p-4 md:gap-4">
 			<TodoBoard createColumnAction={boardColumnSubmit} />
 		</div>
 	);
