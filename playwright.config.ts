@@ -11,6 +11,7 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
 	testDir: './e2e',
+	outputDir: './e2e/results/output',
 	/* Run tests in files in parallel */
 	fullyParallel: true,
 	/* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -32,11 +33,20 @@ export default defineConfig({
 
 	/* Reporter to use. See https://playwright.dev/docs/test-reporters */
 	reporter: process.env.CI
-		? [['list', { printSteps: true }]]
+		? [['github']]
 		: [
-				['list', { printSteps: true }]
-				// ['html', { open: 'always', outputFolder: './test-results/test-results-html' }]
+				['list', { printSteps: true }],
+				['html', { open: 'never', outputFolder: './e2e/results/html-report' }]
 			],
+
+	/* Run your local dev server before starting the tests */
+	webServer: process.env.CI
+		? undefined
+		: {
+				command: 'bun start',
+				url: 'http://127.0.0.1:3000',
+				reuseExistingServer: !process.env.CI
+			},
 
 	/* Configure projects for major browsers */
 	projects: [
@@ -74,12 +84,5 @@ export default defineConfig({
 		// 	name: 'Google Chrome',
 		// 	use: { ...devices['Desktop Chrome'], channel: 'chrome' }
 		// }
-	],
-
-	/* Run your local dev server before starting the tests */
-	webServer: {
-		command: 'bun start',
-		url: 'http://127.0.0.1:3000',
-		reuseExistingServer: !process.env.CI
-	}
+	]
 });

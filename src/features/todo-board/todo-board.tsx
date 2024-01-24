@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { PlusCircleIcon } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { cn } from '@/lib/utils';
 import type { BoardColumnSubmit } from '@/app/actions/board';
@@ -14,6 +15,7 @@ import {
 } from '@/components/primitives/dropdown-menu';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/primitives/form';
 import { Input } from '@/components/primitives/input';
+import { DEMO_BOARD_TESTIDS } from './testids';
 import useTodoBoard from './use-todo-board';
 import type { TodoColumnFormProps } from './use-todo-board-column';
 import useTodoBoardColumn from './use-todo-board-column';
@@ -24,7 +26,6 @@ type Props = {
 };
 
 const OptionsIcon = dynamic(() => import('lucide-react').then((module) => module.MoreVertical));
-const PlusIcon = dynamic(() => import('lucide-react').then((module) => module.PlusCircleIcon));
 const CloseIcon = dynamic(() => import('lucide-react').then((module) => module.MinusCircleIcon));
 
 export default function TodoBoard(props: Props) {
@@ -43,7 +44,11 @@ export default function TodoBoard(props: Props) {
 				<h1 className="text-2xl font-bold">Demo Todo Board</h1>
 				{!isTodoColumnFormVisible && (
 					<div className="text-white">
-						<PlusIcon className="size-6" onClick={onColumnFormShow} />
+						<PlusCircleIcon
+							className="size-6"
+							onClick={onColumnFormShow}
+							data-testid={DEMO_BOARD_TESTIDS.addColumnButton}
+						/>
 					</div>
 				)}
 			</div>
@@ -51,39 +56,43 @@ export default function TodoBoard(props: Props) {
 				className="scrollbar-hide grid auto-cols-max grid-flow-col gap-2 overflow-x-auto overflow-y-visible"
 				ref={boardContainerRef}
 			>
-				{columns.map((column) => (
-					<motion.div
-						key={`${column.index}-${column.name}`}
-						className="w-[320px] rounded-md bg-slate-900 p-4"
-						initial={{ opacity: 0.5 }}
-						animate={{ opacity: 1 }}
-						transition={{ duration: 0.15, ease: 'linear' }}
-					>
-						<div className="flex w-full justify-between pb-4">
-							<p
-								className="cursor-default select-none truncate text-xl font-bold"
-								title={column.name}
-							>
-								{column.name}
-							</p>
-							<DropdownMenu>
-								<DropdownMenuTrigger>
-									<OptionsIcon className="size-4" />
-								</DropdownMenuTrigger>
-								<DropdownMenuContent>
-									<DropdownMenuLabel>Options</DropdownMenuLabel>
-									<DropdownMenuSeparator />
-									<DropdownMenuItem onClick={() => onColumnDelete(column.index)}>
-										Delete Column
-									</DropdownMenuItem>
-								</DropdownMenuContent>
-							</DropdownMenu>
-						</div>
-						<div className="w-full">
-							<TodoItemsForm />
-						</div>
-					</motion.div>
-				))}
+				{columns.map((column) => {
+					const key = `column-${column.index}-${column.name}`.toLowerCase();
+					return (
+						<motion.div
+							key={key}
+							className="w-[320px] rounded-md bg-slate-900 p-4"
+							initial={{ opacity: 0.5 }}
+							animate={{ opacity: 1 }}
+							transition={{ duration: 0.15, ease: 'linear' }}
+							data-testid={key}
+						>
+							<div className="flex w-full justify-between pb-4">
+								<p
+									className="cursor-default select-none truncate text-xl font-bold"
+									title={column.name}
+								>
+									{column.name}
+								</p>
+								<DropdownMenu>
+									<DropdownMenuTrigger>
+										<OptionsIcon className="size-4" />
+									</DropdownMenuTrigger>
+									<DropdownMenuContent>
+										<DropdownMenuLabel>Options</DropdownMenuLabel>
+										<DropdownMenuSeparator />
+										<DropdownMenuItem onClick={() => onColumnDelete(column.index)}>
+											Delete Column
+										</DropdownMenuItem>
+									</DropdownMenuContent>
+								</DropdownMenu>
+							</div>
+							<div className="w-full">
+								<TodoItemsForm />
+							</div>
+						</motion.div>
+					);
+				})}
 				<div
 					className={cn(
 						'invisible relative flex w-0 flex-col gap-4 rounded-md bg-slate-900',
@@ -118,7 +127,12 @@ function TodoColumnForm(props: TodoColumnFormProps) {
 
 	return (
 		<Form {...form}>
-			<form action={formAction} onSubmit={props.onSubmit} className="p-4">
+			<form
+				action={formAction}
+				onSubmit={props.onSubmit}
+				className="p-4"
+				data-testid={DEMO_BOARD_TESTIDS.addColumnForm}
+			>
 				<FormField
 					control={form.control}
 					name="name"
@@ -128,6 +142,7 @@ function TodoColumnForm(props: TodoColumnFormProps) {
 								<Input
 									{...field}
 									ref={refs.name}
+									data-testid={`input-${field.name}`}
 									placeholder="name this column"
 									inputMode="text"
 									disabled={isSubimitting}

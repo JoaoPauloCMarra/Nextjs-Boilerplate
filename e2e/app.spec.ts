@@ -1,29 +1,56 @@
 import { test, expect } from '@playwright/test';
-import { APP_NAME } from '@/lib/constants';
+import { APP_NAME, BASE_URL } from '@/lib/constants';
+import { waitSeconds } from '@/lib/utils';
+import { MAIN_NAV_TESTIDS } from '@/components/main-nav.testids';
+import { DEMO_BOARD_TESTIDS } from '@/features/todo-board/testids';
 import { USERNAME_FORM_TESTIDS } from '@/features/username-form/test-ids';
-import { getInputValueString } from './e2e-utils';
+import { getInputValueString, waitForContentDoShow } from './e2e-utils';
+import type { Locator, Page } from '@playwright/test';
 
-test('has title', async ({ page }) => {
-	await page.goto('/');
+test.describe.configure({ mode: 'serial' });
 
-	await page.waitForSelector('main[style="opacity: 1;"]');
+let currentPage: Page;
+let menuItems: Record<string, Locator>;
 
-	await expect(page).toHaveTitle(`Home - ${APP_NAME}`);
+test.beforeAll(async ({ browser }) => {
+	currentPage = await browser.newPage({
+		reducedMotion: 'reduce',
+		locale: 'en'
+	});
+	await currentPage.goto(`${BASE_URL}/`);
+	await waitForContentDoShow(currentPage, '');
+
+	menuItems = {
+		overview: currentPage.getByTestId(MAIN_NAV_TESTIDS.overview),
+		demoForm: currentPage.getByTestId(MAIN_NAV_TESTIDS.demoForm),
+		demoModal: currentPage.getByTestId(MAIN_NAV_TESTIDS.demoModal),
+		demoApi: currentPage.getByTestId(MAIN_NAV_TESTIDS.demoApi),
+		demoBoard: currentPage.getByTestId(MAIN_NAV_TESTIDS.demoBoard)
+	};
+
+	expect(menuItems.overview).toBeVisible();
+	expect(menuItems.demoForm).toBeVisible();
+	expect(menuItems.demoModal).toBeVisible();
+	expect(menuItems.demoApi).toBeVisible();
+	expect(menuItems.demoBoard).toBeVisible();
 });
 
-test('demo form works', async ({ page }) => {
-	await page.goto('/demo-form');
+test('home has the right title', async () => {
+	await expect(currentPage).toHaveTitle(`Home - ${APP_NAME}`);
+});
 
-	await page.waitForSelector('main[style="opacity: 1;"]');
+test('demo form works', async () => {
+	await menuItems.demoForm.click();
+	await waitForContentDoShow(currentPage, 'demo-form');
 
-	await expect(page).toHaveTitle(`Demo Form - ${APP_NAME}`);
+	await expect(currentPage).toHaveTitle(`Demo Form - ${APP_NAME}`);
 
-	const inputName = page.getByTestId(USERNAME_FORM_TESTIDS.inputUsername);
-	expect(inputName).toBeTruthy();
-	const buttonClear = page.getByTestId(USERNAME_FORM_TESTIDS.buttonClear);
-	expect(buttonClear).toBeTruthy();
-	const buttonSubmit = page.getByTestId(USERNAME_FORM_TESTIDS.buttonSubmit);
-	expect(buttonSubmit).toBeTruthy();
+	const inputName = currentPage.getByTestId(USERNAME_FORM_TESTIDS.inputUsername);
+	expect(inputName).toBeVisible();
+	const buttonClear = currentPage.getByTestId(USERNAME_FORM_TESTIDS.buttonClear);
+	expect(buttonClear).toBeVisible();
+	const buttonSubmit = currentPage.getByTestId(USERNAME_FORM_TESTIDS.buttonSubmit);
+	expect(buttonSubmit).toBeVisible();
 
 	await inputName.fill('jota');
 	expect(await getInputValueString(inputName)).toBe('jota');
@@ -32,26 +59,47 @@ test('demo form works', async ({ page }) => {
 	expect(await getInputValueString(inputName)).toBe('');
 });
 
-test('demo modal works', async ({ page }) => {
-	await page.goto('/demo-modal');
+test('demo modal works', async () => {
+	await menuItems.demoModal.click();
+	await waitForContentDoShow(currentPage, 'demo-modal');
 
-	await page.waitForSelector('main[style="opacity: 1;"]');
-
-	await expect(page).toHaveTitle(`Demo Modal - ${APP_NAME}`);
+	await expect(currentPage).toHaveTitle(`Demo Modal - ${APP_NAME}`);
 });
 
-test('demo api works', async ({ page }) => {
-	await page.goto('/demo-api');
+test('demo api works', async () => {
+	await menuItems.demoApi.click();
+	await waitForContentDoShow(currentPage, 'demo-api');
 
-	await page.waitForSelector('main[style="opacity: 1;"]');
-
-	await expect(page).toHaveTitle(`Demo API - ${APP_NAME}`);
+	await expect(currentPage).toHaveTitle(`Demo API - ${APP_NAME}`);
 });
 
-test('demo board works', async ({ page }) => {
-	await page.goto('/demo-board');
+test('demo board works', async () => {
+	await menuItems.demoBoard.click();
+	await waitForContentDoShow(currentPage, 'demo-board');
 
-	await page.waitForSelector('main[style="opacity: 1;"]');
+	await expect(currentPage).toHaveTitle(`Demo Board - ${APP_NAME}`);
 
-	await expect(page).toHaveTitle(`Demo Board - ${APP_NAME}`);
+	const columnForm = currentPage.getByTestId(DEMO_BOARD_TESTIDS.addColumnForm);
+	expect(columnForm).toBeHidden();
+
+	const addColumnButton = currentPage.getByTestId(DEMO_BOARD_TESTIDS.addColumnButton);
+	expect(addColumnButton).toBeVisible();
+
+	await addColumnButton.click();
+
+	expect(columnForm).toBeVisible();
+
+	const inputName = columnForm.getByTestId('input-name');
+	expect(inputName).toBeVisible();
+
+	await inputName.fill('Backlog');
+	expect(await getInputValueString(inputName)).toBe('Backlog');
+
+	await currentPage.keyboard.press('Enter');
+
+	await waitSeconds(0.15);
+
+	const backlogColumn = currentPage.getByTestId('column-1-backlog');
+	expect(backlogColumn).toBeVisible();
+	expect(backlogColumn.getByText('Backlog')).toBeVisible();
 });
