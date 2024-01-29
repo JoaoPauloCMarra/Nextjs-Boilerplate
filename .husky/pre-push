@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-bun run format
-bun run lint
-git add .
+bun run build
+bun run test:unit
+bun run test:e2e
