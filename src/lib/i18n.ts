@@ -1,4 +1,12 @@
+import type { Locale } from './constants';
+
+const loadLocale = (locale: Locale) =>
+	Promise.all([
+		// Global Translations
+		import(`@/translations/${locale}.json`).then((module) => module.default)
+	]).then((data) => data.reduce((prev, current) => ({ ...prev, ...current }), {}));
+
 export const i18nDictionaries = {
-	en: () => import('@/translations/en.json').then((module) => module.default),
-	pt: () => import('@/translations/pt.json').then((module) => module.default)
+	en: () => loadLocale('en'),
+	pt: () => loadLocale('pt')
 };

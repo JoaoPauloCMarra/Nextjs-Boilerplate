@@ -13,6 +13,10 @@ const nextConfig = {
 
 	outputFileTracing: false,
 
+	images: {
+		remotePatterns: []
+	},
+
 	experimental: {
 		typedRoutes: true,
 		swcPlugins: [['@swc-jotai/react-refresh', {}]]

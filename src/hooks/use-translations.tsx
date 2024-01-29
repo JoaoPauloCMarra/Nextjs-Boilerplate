@@ -25,7 +25,7 @@ export default function useTranslations() {
 
 			return <span dangerouslySetInnerHTML={{ __html: result }} />;
 		} catch (error) {
-			return <>{result}</>;
+			return <span dangerouslySetInnerHTML={{ __html: result }} />;
 		}
 	};
 

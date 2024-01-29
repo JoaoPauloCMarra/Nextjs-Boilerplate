@@ -1,5 +1,6 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 
@@ -13,7 +14,11 @@ const mainAnimationStates: Variants = {
 	}
 };
 
-export default function Template({ children }: { children: React.ReactNode }) {
+type Props = {
+	children: ReactNode;
+};
+
+export default function Template({ children }: Props) {
 	return (
 		<motion.main
 			data-testid="template"
