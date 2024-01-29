@@ -1,4 +1,5 @@
 import { NextResponse, userAgent } from 'next/server';
+import { DEFAULT_LOCALE, LOCALE_COOKIES_KEY } from './lib/constants';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
@@ -7,9 +8,16 @@ export function middleware(request: NextRequest) {
 		console.log('request from bot');
 	}
 
-	const allCookies = request.cookies.getAll();
-	if (allCookies.length) {
-		// console.log('All Cookies: ', allCookies);
+	const cookiesLocale = request.cookies.get(LOCALE_COOKIES_KEY);
+	if (!cookiesLocale) {
+		const headerLocale = request.headers.get('accept-language');
+		const locale = String(headerLocale ?? DEFAULT_LOCALE)
+			.toLowerCase()
+			.slice(0, 2);
+
+		const response = NextResponse.redirect(request.url);
+		response.cookies.set(LOCALE_COOKIES_KEY, locale);
+		return response;
 	}
 
 	return NextResponse.next();

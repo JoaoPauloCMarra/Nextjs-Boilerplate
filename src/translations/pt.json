@@ -1,0 +1,16 @@
+{
+	"Metadata": {
+		"title": "Next Boilerplate"
+	},
+	"LoadingPage": {
+		"text": "carregando..."
+	},
+	"NotFoundPage": {
+		"text": "Página não encontrada",
+		"cta": "Retorne para a página inicial"
+	},
+	"GlobalError": {
+		"text": "Algo deu errado!",
+		"cta": "Tente novamente"
+	}
+}
