@@ -13,7 +13,7 @@ import AppHydrate from '@/components/app-hydrate';
 import GlobalStateDebugger from '@/components/global-state-debugger';
 import MainNav from '@/components/main-nav';
 import { Toaster } from '@/components/primitives/toaster';
-import { SearchForm } from '@/features/search-form';
+import SearchForm from './(header)/_components/search-form';
 import ClientProviders from './client-providers';
 
 const BrandLogo = dynamic(() => import('@/components/brand-logo'));
@@ -54,7 +54,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 					<JotaiProvider>
 						<AppHydrate locale={locale} dictionary={dictionary}>
 							<div className="relative flex flex-col">
-								<div className="border-b">
+								<header className="border-b">
 									<div className="flex flex-col items-center justify-center p-4 md:h-16 md:flex-row md:py-0">
 										<div className="mb-6 md:mb-0 md:mr-4">
 											<BrandLogo className="size-12" />
@@ -64,7 +64,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 											<SearchForm />
 										</div>
 									</div>
-								</div>
+								</header>
 								{children}
 								<GlobalStateDebugger />
 							</div>

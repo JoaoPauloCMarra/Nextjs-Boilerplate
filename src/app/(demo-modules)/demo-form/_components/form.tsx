@@ -14,13 +14,13 @@ import {
 	FormMessage
 } from '@/components/primitives/form';
 import { Input } from '@/components/primitives/input';
-import { USERNAME_FORM_TESTIDS } from './test-ids';
-import type { UseUsernameFormProps } from './use-username-form';
-import useUsernameForm from './use-username-form';
+import useUsernameForm from '../_hooks/use-username-form';
+import { USERNAME_FORM_TESTIDS } from '../test-ids';
+import type { UseUsernameFormProps } from '../_hooks/use-username-form';
 
 const Loader2 = dynamic(() => import('lucide-react').then((module) => module.Loader2));
 
-export default function UsernameForm(props: UseUsernameFormProps) {
+const UsernameForm = (props: UseUsernameFormProps) => {
 	const { form, isSubimitting, onSubmit, onReset, onCancel } = useUsernameForm(props);
 	const {
 		formState: { errors, isDirty, isValid }
@@ -89,4 +89,6 @@ export default function UsernameForm(props: UseUsernameFormProps) {
 			</form>
 		</Form>
 	);
-}
+};
+
+export default UsernameForm;

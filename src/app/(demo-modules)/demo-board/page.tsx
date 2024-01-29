@@ -9,17 +9,12 @@ export const metadata: Metadata = {
 	description: ''
 };
 
-const TodoBoard = dynamic(
-	async () => {
-		return import('@/features/todo-board').then((module) => module.TodoBoard);
-	},
-	{
-		loading: () => {
-			return null;
-			// WIP: return <TodoBoardSkeleton />;
-		}
+const TodoBoard = dynamic(async () => import('./_components/board'), {
+	loading: () => {
+		return null;
+		// WIP: return <TodoBoardSkeleton />;
 	}
-);
+});
 
 export default async function DemoModal() {
 	return (

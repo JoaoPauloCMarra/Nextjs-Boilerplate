@@ -9,8 +9,8 @@ import { setUserAtom } from '@/lib/store';
 import { getUserAtom } from '@/lib/store';
 import type { UsernameFormSubmit } from '@/app/actions/username';
 import { useToast } from '@/components/primitives/use-toast';
-import type { UsernameFormValues } from './utils';
-import { usernameFormSchema } from './utils';
+import { usernameFormSchema } from '../utils';
+import type { UsernameFormValues } from '../utils';
 
 export type UseUsernameFormProps = {
 	action: UsernameFormSubmit;

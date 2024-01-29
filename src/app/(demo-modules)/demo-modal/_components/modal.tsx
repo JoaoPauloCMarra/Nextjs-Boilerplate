@@ -26,7 +26,7 @@ const svgIconVariants: Variants = {
 	}
 };
 
-export default function InformationModal() {
+const DemoModal = () => {
 	return (
 		<div className="flex w-full flex-col justify-center">
 			<Dialog>
@@ -80,4 +80,6 @@ export default function InformationModal() {
 			</Dialog>
 		</div>
 	);
-}
+};
+
+export default DemoModal;

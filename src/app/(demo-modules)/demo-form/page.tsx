@@ -2,18 +2,13 @@ import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { baseMetadata } from '@/lib/constants';
 import { usernameFormSubmit } from '@/app/actions/username';
-import { UsernameFormSkeleton } from '@/features/username-form';
+import UsernameFormSkeleton from './_components/skeleton';
 
-const UsernameForm = dynamic(
-	async () => {
-		return import('@/features/username-form').then((module) => module.UsernameForm);
-	},
-	{
-		loading: () => {
-			return <UsernameFormSkeleton />;
-		}
+const UsernameForm = dynamic(async () => import('./_components/form'), {
+	loading: () => {
+		return <UsernameFormSkeleton />;
 	}
-);
+});
 
 export const metadata: Metadata = {
 	...baseMetadata,

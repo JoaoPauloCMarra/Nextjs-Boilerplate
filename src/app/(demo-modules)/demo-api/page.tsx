@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { baseMetadata } from '@/lib/constants';
-import { waitSeconds } from '@/lib/utils';
 
 export const metadata: Metadata = {
 	...baseMetadata,
@@ -17,7 +16,6 @@ export default async function DemoExternalAPI() {
 	let errorMessage: string = '';
 
 	const response = await fetch(DATA_URL);
-	await waitSeconds(2);
 
 	try {
 		if (!response.ok) {

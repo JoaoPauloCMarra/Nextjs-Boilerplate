@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 import { APP_NAME, BASE_URL } from '@/lib/constants';
 import { waitSeconds } from '@/lib/utils';
+import { DEMO_BOARD_TESTIDS } from '@/app/(demo-modules)/demo-board/test-ids';
+import { USERNAME_FORM_TESTIDS } from '@/app/(demo-modules)/demo-form/test-ids';
 import { MAIN_NAV_TESTIDS } from '@/components/main-nav.testids';
-import { DEMO_BOARD_TESTIDS } from '@/features/todo-board/testids';
-import { USERNAME_FORM_TESTIDS } from '@/features/username-form/test-ids';
 import { getInputValueString, waitForContentDoShow } from './e2e-utils';
 import type { Locator, Page } from '@playwright/test';
 
@@ -14,9 +14,11 @@ let menuItems: Record<string, Locator>;
 
 test.beforeAll(async ({ browser }) => {
 	currentPage = await browser.newPage({
+		storageState: undefined,
 		reducedMotion: 'reduce',
 		locale: 'en'
 	});
+
 	await currentPage.goto(`${BASE_URL}/`);
 	await waitForContentDoShow(currentPage, '');
 

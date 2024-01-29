@@ -13,13 +13,10 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger
 } from '@/components/primitives/dropdown-menu';
-import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/primitives/form';
-import { Input } from '@/components/primitives/input';
-import { DEMO_BOARD_TESTIDS } from './testids';
-import useTodoBoard from './use-todo-board';
-import type { TodoColumnFormProps } from './use-todo-board-column';
-import useTodoBoardColumn from './use-todo-board-column';
-import { useTodoBoardItems } from './use-todo-board-items';
+import TodoColumnForm from './todo-column-form';
+import TodoItemsForm from './todo-items-form';
+import useTodoBoard from '../_hooks/use-todo-board';
+import { DEMO_BOARD_TESTIDS } from '../test-ids';
 
 type Props = {
 	createColumnAction: BoardColumnSubmit;
@@ -28,7 +25,7 @@ type Props = {
 const OptionsIcon = dynamic(() => import('lucide-react').then((module) => module.MoreVertical));
 const CloseIcon = dynamic(() => import('lucide-react').then((module) => module.MinusCircleIcon));
 
-export default function TodoBoard(props: Props) {
+const TodoBoard = (props: Props) => {
 	const {
 		columns,
 		isTodoColumnFormVisible,
@@ -117,60 +114,6 @@ export default function TodoBoard(props: Props) {
 			</div>
 		</div>
 	);
-}
+};
 
-function TodoColumnForm(props: TodoColumnFormProps) {
-	const { form, isSubimitting, refs, formAction } = useTodoBoardColumn(props);
-	const {
-		formState: { errors }
-	} = form;
-
-	return (
-		<Form {...form}>
-			<form
-				action={formAction}
-				onSubmit={props.onSubmit}
-				className="p-4"
-				data-testid={DEMO_BOARD_TESTIDS.addColumnForm}
-			>
-				<FormField
-					control={form.control}
-					name="name"
-					render={({ field, fieldState }) => (
-						<FormItem>
-							<FormControl>
-								<Input
-									{...field}
-									ref={refs.name}
-									data-testid={`input-${field.name}`}
-									placeholder="name this column"
-									inputMode="text"
-									disabled={isSubimitting}
-									readOnly={isSubimitting}
-									autoCapitalize="off"
-									autoComplete="off"
-									autoCorrect="off"
-									className={fieldState.error && 'border-destructive text-destructive'}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				{errors.root?.message && (
-					<div
-						className="mt-1 rounded-md bg-destructive px-4 py-2 text-sm text-destructive-foreground"
-						role="alert"
-					>
-						<span>{errors.root.message}</span>
-					</div>
-				)}
-			</form>
-		</Form>
-	);
-}
-
-function TodoItemsForm() {
-	const {} = useTodoBoardItems();
-	return <p>Form to add items WIP</p>;
-}
+export default TodoBoard;

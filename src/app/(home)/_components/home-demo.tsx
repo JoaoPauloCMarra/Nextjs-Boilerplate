@@ -25,7 +25,7 @@ const svgIconVariants: Variants = {
 	}
 };
 
-export default function HomePage() {
+const HomeDemo = () => {
 	const dragConstrainRef = useRef<ElementRef<'div'>>(null);
 	const { scrollYProgress } = useScroll();
 
@@ -151,4 +151,6 @@ export default function HomePage() {
 			</div>
 		</div>
 	);
-}
+};
+
+export default HomeDemo;

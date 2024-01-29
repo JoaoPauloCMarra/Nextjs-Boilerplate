@@ -3,8 +3,8 @@
 import { motion } from 'framer-motion';
 import { XIcon } from 'lucide-react';
 import { Input } from '@/components/primitives/input';
-import { SEARCH_FORM_TESTIDS } from './test-ids';
-import { useSearchForm } from './use-search-form';
+import { useSearchForm } from '../_hooks/use-search-form';
+import { SEARCH_FORM_TESTIDS } from '../test-ids';
 import type { Variants } from 'framer-motion';
 
 const clearButtonVariants: Variants = {
@@ -12,7 +12,7 @@ const clearButtonVariants: Variants = {
 	show: { opacity: 1 }
 };
 
-export default function SearchForm() {
+const SearchForm = () => {
 	const { inputTerm, onKeyDown, onChange, onClear } = useSearchForm();
 
 	return (
@@ -37,4 +37,6 @@ export default function SearchForm() {
 			</motion.div>
 		</div>
 	);
-}
+};
+
+export default SearchForm;

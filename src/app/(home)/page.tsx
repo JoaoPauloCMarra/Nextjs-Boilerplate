@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { baseMetadata } from '@/lib/constants';
-import HomePage from './home-page';
+import HomeDemo from './_components/home-demo';
 
 export const metadata: Metadata = {
 	...baseMetadata,
@@ -9,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-	return <HomePage />;
+	return <HomeDemo />;
 }

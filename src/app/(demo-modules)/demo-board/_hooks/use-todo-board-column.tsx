@@ -5,8 +5,8 @@ import { useSetAtom } from 'jotai';
 import { useForm } from 'react-hook-form';
 import { addTodoColumnsAtom } from '@/lib/store';
 import type { BoardColumnSubmit } from '@/app/actions/board';
-import type { TodoBoardColumnFormValues } from './utils';
-import { todoBoardColumnFormSchema } from './utils';
+import { todoBoardColumnFormSchema } from '../utils';
+import type { TodoBoardColumnFormValues } from '../utils';
 
 export type TodoColumnFormProps = {
 	totalColumns: number;

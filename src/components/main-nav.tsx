@@ -51,7 +51,6 @@ export default function MainNav({ className, ...props }: Props) {
 				<Link
 					key={label}
 					href={href}
-					prefetch
 					aria-label={`Menu Item ${label}`}
 					data-testid={testID}
 					className={cn(
