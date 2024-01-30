@@ -1,6 +1,6 @@
 import './globals.css';
 
-import type { ReactNode } from 'react';
+import { Suspense, type ReactNode } from 'react';
 import type { Metadata, Viewport } from 'next';
 import { Provider as JotaiProvider } from 'jotai';
 import { Inter as FontSans } from 'next/font/google';
@@ -54,8 +54,8 @@ export default async function RootLayout({ header, children }: Props) {
 					<JotaiProvider>
 						<AppHydrate locale={locale} dictionary={dictionary}>
 							<div className="relative flex flex-col">
-								{header}
-								{children}
+								<Suspense>{header}</Suspense>
+								<Suspense>{children}</Suspense>
 								<GlobalStateDebugger />
 							</div>
 							<Toaster />
