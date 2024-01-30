@@ -50,18 +50,18 @@ export default async function RootLayout({ header, children }: Props) {
 				className="bg-background font-sans text-foreground antialiased"
 				suppressHydrationWarning
 			>
-				<ClientProviders>
-					<JotaiProvider>
-						<AppHydrate locale={locale} dictionary={dictionary}>
+				<JotaiProvider>
+					<AppHydrate locale={locale} dictionary={dictionary}>
+						<ClientProviders>
 							<div className="relative flex flex-col">
 								<Suspense>{header}</Suspense>
 								<Suspense>{children}</Suspense>
 								<GlobalStateDebugger />
 							</div>
 							<Toaster />
-						</AppHydrate>
-					</JotaiProvider>
-				</ClientProviders>
+						</ClientProviders>
+					</AppHydrate>
+				</JotaiProvider>
 			</body>
 		</html>
 	);
