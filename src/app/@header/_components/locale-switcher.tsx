@@ -1,8 +1,13 @@
 'use client';
 
 import type { Locale } from '@/lib/constants';
-import { Button } from '@/components/primitives/button';
+import { cn } from '@/lib/utils';
 import useTranslations from '@/hooks/use-translations';
+
+const OPTIONS = [
+	{ label: 'English', value: 'en' },
+	{ label: 'Português', value: 'pt' }
+] satisfies { label: string; value: Locale }[];
 
 const LocaleSwitcher = () => {
 	const { locale, setLocale } = useTranslations();
@@ -23,21 +28,16 @@ const LocaleSwitcher = () => {
 	};
 
 	return (
-		<div className="flex w-full gap-4">
-			<Button
-				onClick={() => onChange('en')}
-				variant={locale !== 'en' ? 'outline' : 'default'}
-				size="sm"
-			>
-				English
-			</Button>
-			<Button
-				onClick={() => onChange('pt')}
-				variant={locale !== 'pt' ? 'outline' : 'default'}
-				size="sm"
-			>
-				Português
-			</Button>
+		<div className="flex w-full gap-4 rounded-lg border bg-primary-foreground p-2">
+			{OPTIONS.map((option) => (
+				<button
+					key={option.value}
+					onClick={() => onChange(option.value)}
+					className={cn('text-sm font-bold text-primary', locale !== option.value && 'text-muted')}
+				>
+					{option.label}
+				</button>
+			))}
 		</div>
 	);
 };

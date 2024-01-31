@@ -12,11 +12,11 @@ const Header = async () => (
 				<BrandLogo className="size-12" />
 			</div>
 			<MainNav />
-			<div className="flex items-center justify-center">
-				<LocaleSwitcher />
-			</div>
 			<div className="ml-auto mt-6 flex w-full items-center md:mt-0 md:w-auto md:space-x-4">
 				<SearchForm />
+			</div>
+			<div className="ml-4 flex items-center justify-center">
+				<LocaleSwitcher />
 			</div>
 		</div>
 	</header>
