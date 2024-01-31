@@ -33,7 +33,10 @@ const LocaleSwitcher = () => {
 				<button
 					key={option.value}
 					onClick={() => onChange(option.value)}
-					className={cn('text-sm font-bold text-primary', locale !== option.value && 'text-muted')}
+					className={cn(
+						'text-sm font-bold text-primary transition-colors',
+						locale !== option.value && 'text-muted-foreground'
+					)}
 				>
 					{option.label}
 				</button>

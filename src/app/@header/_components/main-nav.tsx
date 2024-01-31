@@ -59,7 +59,7 @@ const MainNav = ({ className, ...props }: Props) => {
 						data-testid={testID}
 						className={cn(
 							'w-full py-2 text-center text-sm font-medium text-muted-foreground transition-colors hover:text-primary md:w-auto md:py-0',
-							pathname === href && 'text-primary'
+							pathname === href && 'font-bold text-primary'
 						)}
 					>
 						{label}
