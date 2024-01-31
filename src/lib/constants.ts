@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 
 export const isDev = process.env.NODE_ENV === 'development';
 
+export const APP_DOMAIN = isDev ? '.localhost' : '.joaopaulocmarra-ssr.vercel.app';
+
 export const LOCALE_COOKIES_KEY = 'appLocale';
 export const SUPPORTED_LOCALES = ['en', 'pt'] as const;
 export const DEFAULT_LOCALE = 'en';
