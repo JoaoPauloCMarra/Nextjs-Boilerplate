@@ -1,0 +1,9 @@
+{
+	"MainMenu": {
+		"overview": "Overview",
+		"demoForm": "Demo Form",
+		"demoModal": "Demo Modal",
+		"demoApi": "Demo API",
+		"demoBoard": "Demo Board"
+	}
+}

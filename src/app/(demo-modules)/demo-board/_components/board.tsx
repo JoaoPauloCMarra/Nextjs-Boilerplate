@@ -50,7 +50,7 @@ const TodoBoard = (props: Props) => {
 				)}
 			</div>
 			<div
-				className="scrollbar-hide grid auto-cols-max grid-flow-col gap-2 overflow-x-auto overflow-y-visible"
+				className="scrollbar-hide grid min-h-36 auto-cols-max grid-flow-col gap-2 overflow-x-auto overflow-y-hidden"
 				ref={boardContainerRef}
 			>
 				{columns.map((column) => {

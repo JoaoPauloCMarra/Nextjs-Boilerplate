@@ -15,7 +15,7 @@ const Header = async () => (
 			<div className="ml-auto mt-6 flex w-full items-center md:mt-0 md:w-auto md:space-x-4">
 				<SearchForm />
 			</div>
-			<div className="ml-4 flex items-center justify-center">
+			<div className="ml-4 mt-4 flex items-center justify-center md:mt-0">
 				<LocaleSwitcher />
 			</div>
 		</div>

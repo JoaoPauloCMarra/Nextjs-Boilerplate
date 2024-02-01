@@ -12,12 +12,5 @@
 	"GlobalError": {
 		"text": "Algo deu errado!",
 		"cta": "Tente novamente"
-	},
-	"MainMenu": {
-		"overview": "Visão Geral",
-		"demoForm": "Demo Formulário",
-		"demoModal": "Demo Modal",
-		"demoApi": "Demo API",
-		"demoBoard": "Demo Board"
 	}
 }

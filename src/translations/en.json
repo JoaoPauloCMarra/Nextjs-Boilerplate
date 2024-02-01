@@ -12,12 +12,5 @@
 	"GlobalError": {
 		"text": "Something went wrong!",
 		"cta": "Try again"
-	},
-	"MainMenu": {
-		"overview": "Overview",
-		"demoForm": "Demo Form",
-		"demoModal": "Demo Modal",
-		"demoApi": "Demo API",
-		"demoBoard": "Demo Board"
 	}
 }
