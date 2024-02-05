@@ -15,7 +15,7 @@
 		"lint": "next lint --fix --max-warnings 0",
 		"format": "prettier . --write",
 		"prepare": "husky install",
-		"postinstall": "bunx playwright install --with-deps",
+		"postinstall": "bun playwright install --with-deps",
 		"shadcn-add": "bunx shadcn-ui@latest add"
 	},
 	"browserslist": [
