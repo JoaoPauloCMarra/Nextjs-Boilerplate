@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import type { Locale } from '@/lib/constants';
 import { APP_DOMAIN, DEFAULT_LOCALE, LOCALE_COOKIES_KEY } from '@/lib/constants';
-import { i18nDictionaries } from '@/lib/i18n';
+import { loadLocale } from '@/lib/i18n';
 
 export async function GET(request: Request): Promise<Response> {
 	try {
@@ -16,7 +16,7 @@ export async function GET(request: Request): Promise<Response> {
 			domain: APP_DOMAIN
 		});
 
-		const dictionary = await i18nDictionaries[locale]();
+		const dictionary = await loadLocale(locale);
 
 		return Response.json({ dictionary, error: '' }, { status: 200 });
 	} catch (error) {

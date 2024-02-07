@@ -25,7 +25,7 @@ export default function GlobalStateDebugger() {
 	const userInfo = useAtomValue(getUserAtom);
 	const searchTerm = useAtomValue(getSearchTermAtom);
 	const boardColumns = useAtomValue(getTodoColumnsAtom);
-	const [visible, setVisible] = useState(true);
+	const [visible, setVisible] = useState(false);
 
 	return (
 		<>

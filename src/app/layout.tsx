@@ -7,7 +7,7 @@ import { Inter as FontSans } from 'next/font/google';
 import { cookies } from 'next/headers';
 import type { Locale } from '@/lib/constants';
 import { LOCALE_COOKIES_KEY, baseMetadata } from '@/lib/constants';
-import { i18nDictionaries } from '@/lib/i18n';
+import { loadLocale } from '@/lib/i18n';
 import AppHydrate from '@/components/app-hydrate';
 import GlobalStateDebugger from '@/components/global-state-debugger';
 import { Toaster } from '@/components/primitives/toaster';
@@ -42,7 +42,7 @@ type Props = {
 
 export default async function RootLayout({ header, children }: Props) {
 	const locale = cookies().get(LOCALE_COOKIES_KEY)?.value as Locale;
-	const dictionary = await i18nDictionaries[locale]();
+	const dictionary = await loadLocale(locale);
 
 	return (
 		<html lang={locale} className={fontSans.variable} suppressHydrationWarning>
