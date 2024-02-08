@@ -4,6 +4,7 @@
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"module": "esnext",
 		"moduleResolution": "bundler",
+		"moduleDetection": "force",
 
 		"allowJs": true,
 		"skipLibCheck": true,
@@ -26,6 +27,6 @@
 			"@/*": ["./src/*"]
 		}
 	},
-	"include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "*.cjs"],
+	"include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "*.cjs", ".*.cjs"],
 	"exclude": ["node_modules", "next-env.d.ts"]
 }
