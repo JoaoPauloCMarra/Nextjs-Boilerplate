@@ -3,7 +3,7 @@ import { APP_NAME, BASE_URL } from '@/lib/constants';
 import { waitSeconds } from '@/lib/utils';
 import { DEMO_BOARD_TESTIDS } from '@/app/(demo-modules)/demo-board/test-ids';
 import { USERNAME_FORM_TESTIDS } from '@/app/(demo-modules)/demo-form/test-ids';
-import { MAIN_NAV_TESTIDS } from '@/app/@header/_components/test-ids';
+import { MAIN_NAV_TESTIDS } from '@/app/_header/_components/test-ids';
 import { getInputValueString, waitForContentDoShow } from './e2e-utils';
 import type { Locator, Page } from '@playwright/test';
 

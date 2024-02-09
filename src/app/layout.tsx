@@ -1,6 +1,7 @@
 import './globals.css';
 
-import { Suspense, type ReactNode } from 'react';
+import type { PropsWithChildren } from 'react';
+import { Suspense } from 'react';
 import type { Metadata, Viewport } from 'next';
 import { Provider as JotaiProvider } from 'jotai';
 import { Inter as FontSans } from 'next/font/google';
@@ -11,6 +12,7 @@ import { loadLocale } from '@/lib/i18n';
 import AppHydrate from '@/components/app-hydrate';
 import GlobalStateDebugger from '@/components/global-state-debugger';
 import { Toaster } from '@/components/primitives/toaster';
+import Header from './_header/default';
 import ClientProviders from './client-providers';
 
 const fontSans = FontSans({
@@ -35,12 +37,7 @@ export function generateViewport() {
 
 export const metadata: Metadata = baseMetadata;
 
-type Props = {
-	header: ReactNode;
-	children: ReactNode;
-};
-
-export default async function RootLayout({ header, children }: Props) {
+export default async function RootLayout({ children }: PropsWithChildren) {
 	const locale = cookies().get(LOCALE_COOKIES_KEY)?.value as Locale;
 	const dictionary = await loadLocale(locale);
 
@@ -54,7 +51,7 @@ export default async function RootLayout({ header, children }: Props) {
 					<AppHydrate locale={locale} dictionary={dictionary}>
 						<ClientProviders>
 							<div className="relative flex flex-col">
-								<Suspense>{header}</Suspense>
+								<Header />
 								<Suspense>{children}</Suspense>
 								<GlobalStateDebugger />
 							</div>

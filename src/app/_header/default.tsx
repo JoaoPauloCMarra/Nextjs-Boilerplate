@@ -6,7 +6,7 @@ import SearchForm from './_components/search-form';
 const BrandLogo = dynamic(() => import('@/components/brand-logo'));
 
 const Header = async () => (
-	<header className="border-b">
+	<header className="border-b bg-slate-900">
 		<div className="flex flex-col items-center justify-center p-4 md:h-16 md:flex-row md:py-0">
 			<div className="mb-6 md:mb-0 md:mr-4">
 				<BrandLogo className="size-12" />
