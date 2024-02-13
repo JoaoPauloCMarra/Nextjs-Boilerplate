@@ -1,6 +1,6 @@
 import { NextResponse, userAgent } from 'next/server';
-import { DEFAULT_LOCALE, LOCALE_COOKIES_KEY } from './lib/constants';
 import type { NextRequest } from 'next/server';
+import { DEFAULT_LOCALE, LOCALE_COOKIES_KEY } from './lib/constants';
 
 export function middleware(request: NextRequest) {
 	const { isBot } = userAgent(request);

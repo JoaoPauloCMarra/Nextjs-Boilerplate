@@ -19,7 +19,10 @@ const nextConfig = {
 
 	experimental: {
 		typedRoutes: true,
-		swcPlugins: [['@swc-jotai/react-refresh', {}]]
+		swcPlugins: [['@swc-jotai/react-refresh', {}]],
+		turbotrace: {
+			logAll: true
+		}
 	}
 };
 

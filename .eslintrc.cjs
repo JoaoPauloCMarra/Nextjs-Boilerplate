@@ -81,12 +81,17 @@ module.exports = {
 						position: 'before'
 					},
 					{
-						pattern: '@/lib/**',
-						group: 'internal',
-						position: 'after'
+						pattern: 'next/**',
+						group: 'external',
+						position: 'before'
 					},
 					{
-						pattern: '@/pages/**',
+						pattern: '@vercel',
+						group: 'external',
+						position: 'before'
+					},
+					{
+						pattern: '@/lib/**',
 						group: 'internal',
 						position: 'after'
 					},

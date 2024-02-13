@@ -3,9 +3,10 @@ import './globals.css';
 import type { PropsWithChildren } from 'react';
 import { Suspense } from 'react';
 import type { Metadata, Viewport } from 'next';
-import { Provider as JotaiProvider } from 'jotai';
 import { Inter as FontSans } from 'next/font/google';
 import { cookies } from 'next/headers';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Provider as JotaiProvider } from 'jotai';
 import type { Locale } from '@/lib/constants';
 import { LOCALE_COOKIES_KEY, baseMetadata } from '@/lib/constants';
 import { loadLocale } from '@/lib/i18n';
@@ -47,18 +48,19 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 				className="bg-background font-sans text-foreground antialiased"
 				suppressHydrationWarning
 			>
-				<JotaiProvider>
-					<AppHydrate locale={locale} dictionary={dictionary}>
-						<ClientProviders>
-							<div className="relative flex flex-col">
+				<div className="relative flex flex-col">
+					<JotaiProvider>
+						<AppHydrate locale={locale} dictionary={dictionary}>
+							<ClientProviders>
 								<Header />
 								<Suspense>{children}</Suspense>
 								<GlobalStateDebugger />
-							</div>
-							<Toaster />
-						</ClientProviders>
-					</AppHydrate>
-				</JotaiProvider>
+								<Toaster />
+								<SpeedInsights />
+							</ClientProviders>
+						</AppHydrate>
+					</JotaiProvider>
+				</div>
 			</body>
 		</html>
 	);

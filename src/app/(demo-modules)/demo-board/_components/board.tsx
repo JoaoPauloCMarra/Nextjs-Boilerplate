@@ -1,8 +1,8 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { PlusCircleIcon } from 'lucide-react';
-import dynamic from 'next/dynamic';
 import { cn } from '@/lib/utils';
 import type { BoardColumnSubmit } from '@/app/actions/board';
 import {
