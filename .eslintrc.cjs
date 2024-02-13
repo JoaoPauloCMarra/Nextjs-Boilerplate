@@ -120,6 +120,14 @@ module.exports = {
 		'import/no-named-as-default': 'error',
 		'import/prefer-default-export': 'off',
 
-		'@next/next/no-img-element': 'off'
+		'@next/next/no-img-element': 'off',
+
+		'react/self-closing-comp': [
+			'error',
+			{
+				component: true,
+				html: true
+			}
+		]
 	}
 };
