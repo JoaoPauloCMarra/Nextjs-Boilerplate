@@ -8,7 +8,7 @@ import { cookies } from 'next/headers';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Provider as JotaiProvider } from 'jotai';
 import type { Locale } from '@/lib/constants';
-import { LOCALE_COOKIES_KEY, baseMetadata } from '@/lib/constants';
+import { LOCALE_COOKIES_KEY, baseMetadata, baseViewport } from '@/lib/constants';
 import { loadLocale } from '@/lib/i18n';
 import AppHydrate from '@/components/app-hydrate';
 import GlobalStateDebugger from '@/components/global-state-debugger';
@@ -22,21 +22,8 @@ const fontSans = FontSans({
 	display: 'swap'
 });
 
-export function generateViewport() {
-	const config: Viewport = {
-		themeColor: 'black',
-		width: 'device-width',
-		initialScale: 1,
-		maximumScale: 5,
-		userScalable: true,
-		viewportFit: 'cover',
-		colorScheme: 'dark'
-	};
-
-	return config;
-}
-
 export const metadata: Metadata = baseMetadata;
+export const viewport: Viewport = baseViewport;
 
 export default async function RootLayout({ children }: PropsWithChildren) {
 	const locale = cookies().get(LOCALE_COOKIES_KEY)?.value as Locale;
@@ -56,11 +43,11 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 								<Suspense>{children}</Suspense>
 								<GlobalStateDebugger />
 								<Toaster />
-								<SpeedInsights />
 							</ClientProviders>
 						</AppHydrate>
 					</JotaiProvider>
 				</div>
+				<SpeedInsights />
 			</body>
 		</html>
 	);
