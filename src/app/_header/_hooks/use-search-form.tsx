@@ -1,21 +1,32 @@
 'use client';
 
-import { useState, type ChangeEventHandler, type KeyboardEventHandler } from 'react';
+import {
+	useState,
+	type ChangeEventHandler,
+	type KeyboardEventHandler,
+	useEffect,
+	useCallback
+} from 'react';
 import { useSetAtom } from 'jotai';
 import { setSearchTermAtom } from '@/lib/store';
+import useDebounce from '@/hooks/use-debounce';
 
 export function useSearchForm() {
 	const setTerm = useSetAtom(setSearchTermAtom);
 	const [inputTerm, setInputTerm] = useState('');
+	const debouncedInputTerm = useDebounce(inputTerm, 500);
 
 	const onClear = () => {
 		setTerm('');
 		setInputTerm('');
 	};
 
-	const onSubmit = (term: string) => {
-		setTerm(term);
-	};
+	const onSubmit = useCallback(
+		(term: string) => {
+			setTerm(term);
+		},
+		[setTerm]
+	);
 
 	const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
 		setInputTerm(e.currentTarget.value);
@@ -29,6 +40,12 @@ export function useSearchForm() {
 			onSubmit(inputTerm);
 		}
 	};
+
+	useEffect(() => {
+		if (debouncedInputTerm.length > 0) {
+			onSubmit(debouncedInputTerm);
+		}
+	}, [debouncedInputTerm, onSubmit]);
 
 	return {
 		inputTerm,
