@@ -42,9 +42,8 @@ export function useSearchForm() {
 	};
 
 	useEffect(() => {
-		if (debouncedInputTerm.length > 0) {
-			onSubmit(debouncedInputTerm);
-		}
+		if (!debouncedInputTerm.length) return;
+		onSubmit(debouncedInputTerm);
 	}, [debouncedInputTerm, onSubmit]);
 
 	return {
