@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { baseMetadata } from '@/lib/constants';
-import { waitSeconds } from '@/lib/utils';
 import DemoAPISkeleton from './_components/skeleton';
 
 const ApiDemo = dynamic(() => import('./_components/api-demo'), {
@@ -39,8 +38,6 @@ const fetchData = async (id?: number) => {
 	} catch (error) {
 		errorMessage = String(error);
 	}
-
-	await waitSeconds(1);
 
 	return { data, errorMessage };
 };

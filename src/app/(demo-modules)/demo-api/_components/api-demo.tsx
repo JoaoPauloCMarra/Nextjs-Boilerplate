@@ -31,7 +31,7 @@ const ApiDemo = (props: Props) => {
 	const onRefetch = async () => {
 		setResponse((current) => ({ ...current, errorMessage: '', loading: true }));
 		try {
-			const response = await props.fetchData(Math.floor(Math.random() * 20) + 1);
+			const response = await props.fetchData(Math.floor(Math.random() * 5) + 1);
 			setResponse({ data: response, errorMessage: '', loading: false });
 		} catch (error) {
 			setResponse({ data: {}, errorMessage: String(error), loading: false });
@@ -43,15 +43,12 @@ const ApiDemo = (props: Props) => {
 			<h2 className="text-2xl">Demo api response inside a RSC with 2s wait</h2>
 			<p className="italic opacity-70">data from: {props.url}</p>
 			<div className="w-full max-w-sm overflow-x-auto rounded-xl bg-slate-700 p-1 md:p-4">
-				{loading ? (
-					<div className="flex w-full items-center justify-center">
-						<LoadingIndicator />
-					</div>
-				) : null}
-				{!loading && !errorMessage && data ? <JSONViewer data={data} /> : null}
-				{!loading && errorMessage && <code className="text-sm text-red-500">{errorMessage}</code>}
+				{!errorMessage && data ? <JSONViewer data={data} /> : null}
+				{errorMessage ? <code className="text-sm text-red-500">{errorMessage}</code> : null}
 			</div>
-			<Button onClick={onRefetch}>refetch with different id</Button>
+			<Button onClick={onRefetch} disabled={loading}>
+				{loading ? <LoadingIndicator className="size-4 fill-black" /> : 'refetch with different id'}
+			</Button>
 		</div>
 	);
 };
