@@ -36,7 +36,6 @@ jobs:
 
       - name: Store Playwright's Version
         run: |
-          echo "Storing Playwright's Version..."
           PLAYWRIGHT_VERSION=$(npm list @playwright/test --depth=0 | grep @playwright/test | awk -F@ '{print $NF}')
           echo "Playwright's Version: $PLAYWRIGHT_VERSION"
           echo "PLAYWRIGHT_VERSION=$PLAYWRIGHT_VERSION" >> $GITHUB_ENV
@@ -56,10 +55,10 @@ jobs:
       - name: Build
         run: bun run build
 
-      - name: Running Unit Tests
+      - name: Unit Tests
         run: bun test:unit
 
-      - name: Run Playwright tests
+      - name: Run E2E tests
         env:
           CI: true
         run: bun test:e2e
