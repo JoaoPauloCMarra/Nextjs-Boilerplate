@@ -41,7 +41,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 							<ClientProviders>
 								<Header />
 								<Suspense>{children}</Suspense>
-								<GlobalStateDebugger />
+								<GlobalStateDebugger isVisible />
 								<Toaster />
 							</ClientProviders>
 						</AppHydrate>

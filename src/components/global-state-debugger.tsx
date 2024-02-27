@@ -21,11 +21,15 @@ const windowVariant: Variants = {
 	}
 };
 
-export default function GlobalStateDebugger() {
+type Props = {
+	isVisible?: boolean;
+};
+
+export default function GlobalStateDebugger({ isVisible }: Props) {
 	const userInfo = useAtomValue(getUserAtom);
 	const searchTerm = useAtomValue(getSearchTermAtom);
 	const boardColumns = useAtomValue(getTodoColumnsAtom);
-	const [visible, setVisible] = useState(false);
+	const [visible, setVisible] = useState(isVisible);
 
 	return (
 		<>
@@ -37,7 +41,7 @@ export default function GlobalStateDebugger() {
 			<div
 				className={cn(
 					'fixed bottom-2 z-10 flex w-full flex-col items-center opacity-90',
-					!visible && 'pointer-events-none -z-10'
+					!visible && 'pointer-events-none'
 				)}
 			>
 				<motion.div

@@ -1,3 +1,5 @@
+'use server';
+
 import type { Locale } from './constants';
 
 export const loadLocale = (locale: Locale) =>
