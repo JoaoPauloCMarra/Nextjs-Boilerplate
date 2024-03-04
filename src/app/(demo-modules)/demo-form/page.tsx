@@ -10,11 +10,16 @@ const UsernameForm = dynamic(async () => import('./_components/form'), {
 	}
 });
 
-export const metadata: Metadata = {
-	...baseMetadata,
-	title: `Demo Form - ${baseMetadata.title}`,
-	description: ''
-};
+export async function generateMetadata(): Promise<Metadata> {
+	const title = `Demo Form - ${baseMetadata.title}`;
+	const description = 'A demo form';
+
+	return {
+		...baseMetadata,
+		title,
+		description
+	};
+}
 
 export default async function DemoForm() {
 	return (

@@ -3,11 +3,16 @@ import dynamic from 'next/dynamic';
 import { baseMetadata } from '@/lib/constants';
 import DemoModalSkeleton from './_components/skeleton';
 
-export const metadata: Metadata = {
-	...baseMetadata,
-	title: `Demo Modal - ${baseMetadata.title}`,
-	description: ''
-};
+export async function generateMetadata(): Promise<Metadata> {
+	const title = `Demo Modal - ${baseMetadata.title}`;
+	const description = 'A demo modal';
+
+	return {
+		...baseMetadata,
+		title,
+		description
+	};
+}
 
 const Modal = dynamic(async () => import('@/app/(demo-modules)/demo-modal/_components/modal'), {
 	loading: () => {

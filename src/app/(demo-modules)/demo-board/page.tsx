@@ -3,11 +3,16 @@ import dynamic from 'next/dynamic';
 import { baseMetadata } from '@/lib/constants';
 import { boardColumnSubmit } from '@/app/actions/board';
 
-export const metadata: Metadata = {
-	...baseMetadata,
-	title: `Demo Board - ${baseMetadata.title}`,
-	description: ''
-};
+export async function generateMetadata(): Promise<Metadata> {
+	const title = `Demo Board - ${baseMetadata.title}`;
+	const description = 'A demo kanban board';
+
+	return {
+		...baseMetadata,
+		title,
+		description
+	};
+}
 
 const TodoBoard = dynamic(async () => import('./_components/board'), {
 	loading: () => {

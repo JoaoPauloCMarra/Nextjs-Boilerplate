@@ -5,7 +5,6 @@
 		"module": "esnext",
 		"moduleResolution": "bundler",
 		"moduleDetection": "force",
-
 		"allowJs": true,
 		"skipLibCheck": true,
 		"strict": true,
@@ -14,20 +13,24 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"incremental": true,
-
 		"jsx": "preserve",
-
 		"plugins": [
 			{
 				"name": "next"
 			}
 		],
-
 		"baseUrl": ".",
 		"paths": {
 			"@/*": ["./src/*"]
 		}
 	},
-	"include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "*.cjs", ".*.cjs"],
+	"include": [
+		"**/*.ts",
+		"**/*.tsx",
+		".next/types/**/*.ts",
+		"*.cjs",
+		".*.cjs",
+		"/Users/jota/Workspace/Projects/nextjs-boilerplate/.next/types/**/*.ts"
+	],
 	"exclude": ["node_modules", "next-env.d.ts"]
 }

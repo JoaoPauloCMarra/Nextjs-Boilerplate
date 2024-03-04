@@ -9,11 +9,16 @@ const ApiDemo = dynamic(() => import('./_components/api-demo'), {
 	}
 });
 
-export const metadata: Metadata = {
-	...baseMetadata,
-	title: `Demo API - ${baseMetadata.title}`,
-	description: ''
-};
+export async function generateMetadata(): Promise<Metadata> {
+	const title = `Demo API - ${baseMetadata.title}`;
+	const description = 'A demo api call';
+
+	return {
+		...baseMetadata,
+		title,
+		description
+	};
+}
 
 const DATA_URL = 'https://jsonplaceholder.typicode.com/users';
 
