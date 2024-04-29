@@ -10,7 +10,6 @@ module.exports = {
 		'next/core-web-vitals',
 		'plugin:@typescript-eslint/recommended',
 		'plugin:jsx-a11y/recommended',
-		'plugin:react-hooks/recommended',
 		'plugin:react-hook-form/recommended',
 		'plugin:tailwindcss/recommended',
 		'plugin:prettier/recommended'
@@ -21,7 +20,6 @@ module.exports = {
 		'import',
 		'jsx-a11y',
 		'react',
-		'react-hooks',
 		'react-hook-form',
 		'tailwindcss',
 		'vitest',
